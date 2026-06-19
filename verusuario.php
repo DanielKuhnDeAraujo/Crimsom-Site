@@ -28,11 +28,12 @@
     <?php
 
     try {
-        $sql = "SELECT * FROM usuario WHERE id = $id";
-        $query = $conexao->query($sql);
+        $sql = "SELECT * FROM usuario WHERE id = :id";
+        $query = $conn->prepare($sql);
+        $query->execute(['id' => $id]);
 
         if ($query->num_rows > 0) {
-            $dados = $query->fetch_assoc();
+            $dados = $query->fetch(PDO::FETCH_ASSOC);
             $NOME = $dados["NOME"];
             $EMAIL = $dados["EMAIL"];
             $SENHA = $dados["SENHA"];
@@ -54,6 +55,7 @@
     <main class="container">
         
     </main>
+    
 </body>
 
 </html>
