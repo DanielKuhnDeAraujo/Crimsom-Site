@@ -88,18 +88,18 @@
         <div class="card-wrap">
             <div class="card-header-bar">
                 <span class="card-name">Sapo Gigante</span>
-                <span class="badge-rarity">Ordinário</span>
+                <span class="badge-rarity rarity-ordinario">Comum</span>
             </div>
             <div class="card-art">
                 <a href="#" class="card-art-link">
-                    <img src="img/logo.png" alt="Sapo Gigante">
+                    <img src="img/logo.png" alt="Sapo Gigante+">
                 </a>
             </div>
             <div class="card-footer-bar">
                 <span class="card-edition">Coleção:</span>
                 <span class="card-price">R$ 12,90</span>
             </div>
-            <div clss="card-actions">
+            <div class="card-actions">
                 <div class="card-counter">
                     <button class="counter-btn" onclick="changeQty(this, -1)">−</button>
                     <span class="counter-qty">0</span>
@@ -112,7 +112,7 @@
         <div class="card-wrap">
             <div class="card-header-bar">
                 <span class="card-name">Sapo Gigante+</span>
-                <span class="badge-rarity rarity-rare">Excepcional</span>
+                <span class="badge-rarity rarity-excepcional">Excepcional</span>
             </div>
             <div class="card-art">
                 <a href="#" class="card-art-link">
@@ -136,7 +136,7 @@
         <div class="card-wrap">
             <div class="card-header-bar">
                 <span class="card-name">Sapo Gigante+++</span>
-                <span class="badge-rarity rarity-legendary">Elite</span>
+                <span class="badge-rarity rarity-elite">Elite</span>
             </div>
             <div class="card-art">
                 <a href="#" class="card-art-link">
@@ -160,7 +160,7 @@
         <div class="card-wrap">
             <div class="card-header-bar">
                 <span class="card-name">Sapo Gigante++++</span>
-                <span class="badge-rarity rarity-unique">Único</span>
+                <span class="badge-rarity rarity-unico">Único</span>
             </div>
             <div class="card-art">
                 <a href="#" class="card-art-link">
