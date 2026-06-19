@@ -181,9 +181,14 @@ footer p {
     white-space: nowrap;
 }
 
-.rarity-rare {
+.rarity-excepcional {
     background: var(--color-crimson);
     color: #fff0f0;
+}
+
+.rarity-elite {
+    background: #7df481;
+    color: #1a1000;
 }
 
 .rarity-legendary {
@@ -191,7 +196,7 @@ footer p {
     color: #1a1000;
 }
 
-.rarity-unique {
+.rarity-unico {
     background: #5b0085;
     color: #f0e0ff;
 }

@@ -56,12 +56,12 @@
         <?php
         $stmt = $conn->prepare('SELECT * FROM cartas');
         $stmt->execute();
-        while($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             echo'
                 <div class="card-wrap">
                     <div class="card-header-bar">
-                        <span class="card-name">Sapo Gigante+</span>
-                        <span class="badge-rarity rarity-rare">Excepcional</span>
+                        <span class="card-name">'. $row['NOME'].'</span>
+                        <span class="badge-rarity rarity-'. $row['RARIDADE'] . ' ">' . $row['RARIDADE'] . '</span>
                     </div>
                     <div class="card-art">
                         <a href="#" class="card-art-link">
@@ -69,8 +69,8 @@
                         </a>
                     </div>
                     <div class="card-footer-bar">
-                        <span class="card-edition">Coleção:</span>
-                        <span class="card-price">R$ 89,90</span>
+                        <span class="card-edition">Coleção: '. $row['COLECAO'] .'</span>
+                        <span class="card-price">' . $row['PRECO'] .'</span>
                     </div>
                     <div class="card-actions">
                         <div class="card-counter">
