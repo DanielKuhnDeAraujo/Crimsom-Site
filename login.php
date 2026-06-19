@@ -42,6 +42,23 @@
     </nav>
 
     <div class="page-wrap">
+        <?php
+        if(isset($_GET['erro'])){
+            if ($_GET['erro']=='falta'){
+                $erro = "Tivemos um problema, não recebemos todos os dados necessários.";
+            }
+            if ($_GET['erro']=='nenc'){
+                $erro = "Não encontramos nenhum usuário com esse nome ou email.";
+            }
+            if ($_GET['erro']=='senha'){
+                $erro = "Senha Incorreta";
+            }
+            echo '
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>'. $erro . '
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+        }?>
         <div class="page-header">
             <div>
                 <h1>Entre na sua conta</h1>
@@ -55,13 +72,8 @@
 
             <form action="login_action.php" method="POST">
                 <div class="form-group">
-                    <label for="nome">Nome</label>
-                    <input type="text" id="nome" name="nome" placeholder="Nome de Usuário" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                    <label for="nome">Nome ou Email</label>
+                    <input type="text" id="nome" name="ident" placeholder="Seu nome ou email" required>
                 </div>
 
                 <div class="form-group">

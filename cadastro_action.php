@@ -6,6 +6,9 @@ if(!isset($_POST['nome'],$_POST['email'],$_POST['senha'])){
   header("Location:cadastro.php?erro=falta"); 
   exit;
 }
+else{
+  echo "aaa";
+}
 $nome =$_POST['nome'];
 $email = $_POST['email'];
 $senha = $_POST['senha'];
@@ -33,5 +36,8 @@ $stmt->execute();
 session_start();
 $_SESSION['nome'] = $nome;
 $_SESSION['nivel'] = $nivel;
+
+header("Location:index.php"); 
+exit;
 
 ?>
