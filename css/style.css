@@ -181,6 +181,10 @@ footer p {
     white-space: nowrap;
 }
 
+.rarity-ordinario {
+    background: #aaaaaa;
+    color: #fff0f0;
+}
 .rarity-excepcional {
     background: var(--color-crimson);
     color: #fff0f0;
