@@ -42,6 +42,25 @@
     </nav>
 
     <div class="page-wrap">
+        <?php
+        if(isset($_GET['erro'])){
+            if ($_GET['erro']=='falta'){
+                $erro = "Tivemos um problema, não recebemos todos os dados necessários.";
+            }
+            if ($_GET['erro']=='repnome'){
+                $erro = "Já existe um usuário com esse nome";
+            }
+            if ($_GET['erro']=='repemail'){
+                $erro = "Já existe um usuário com esse email";
+            }
+            echo '
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>'. $erro . '
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+        }
+        ?>
+
         <div class="page-header">
             <div>
                 <h1>Crie sua conta</h1>
@@ -89,6 +108,7 @@
     </footer>
 
 </body>
+<script src="js/bootstrap.bundle.min.js"></script>
 <script src="script.js"></script>
 
 </html>
