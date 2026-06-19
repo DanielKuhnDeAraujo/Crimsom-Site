@@ -6,6 +6,9 @@ if(!isset($_POST['nome'],$_POST['email'],$_POST['senha'])){
   header("Location:cadastro.php?erro=falta"); 
   exit;
 }
+else{
+  echo "aaa";
+}
 $nome =$_POST['nome'];
 $email = $_POST['email'];
 $senha = $_POST['senha'];
@@ -25,7 +28,7 @@ if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
   header("Location:cadastro.php?erro=repemail"); 
   exit;
 }
-$nivel='user'
+$nivel='user';
 $senha = password_hash($senha,PASSWORD_DEFAULT);
 $stmt = $conn->prepare('insert into usuario (nome, email ,senha,nivel) values ("'. $nome . '" , "'. $email . '" , "'. $senha . '" , '. $nivel .');');
 $stmt->execute();
@@ -33,5 +36,8 @@ $stmt->execute();
 session_start();
 $_SESSION['nome'] = $nome;
 $_SESSION['nivel'] = $nivel;
+
+header("Location:index.php"); 
+exit;
 
 ?>
