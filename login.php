@@ -72,8 +72,8 @@
 
             <form action="login_action.php" method="POST">
                 <div class="form-group">
-                    <label for="nome">Nome ou Email</label>
-                    <input type="text" id="nome" name="ident" placeholder="Seu nome ou email" required>
+                    <label for="ident">Nome ou Email</label>
+                    <input type="text" id="ident" name="ident" placeholder="Seu nome ou email" required>
                 </div>
 
                 <div class="form-group">
@@ -100,6 +100,7 @@
     </footer>
 
 </body>
+<script src="js/bootstrap.bundle.min.js"></script>
 <script src="script.js"></script>
 
 </html>

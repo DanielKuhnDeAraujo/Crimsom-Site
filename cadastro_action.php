@@ -30,7 +30,7 @@ if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
 }
 $nivel='user';
 $senha = password_hash($senha,PASSWORD_DEFAULT);
-$stmt = $conn->prepare('insert into usuario (nome, email ,senha,nivel) values ("'. $nome . '" , "'. $email . '" , "'. $senha . '" , '. $nivel .');');
+$stmt = $conn->prepare('insert into usuario (nome, email ,senha,nivel) values ("'. $nome . '" , "'. $email . '" , "'. $senha . '" , "'. $nivel  .'");');
 $stmt->execute();
 
 session_start();

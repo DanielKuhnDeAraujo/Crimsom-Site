@@ -1,42 +1,51 @@
 <?php
-
+session_start();
 include("conexao.php");
 
-if(!isset($_POST['nome'],$_POST['email'],$_POST['senha'])){
-  header("Location:cadastro.php?erro=falta"); 
+if(!isset($_POST['senha'],$_POST['ident'])){
+  header("Location:login.php?erro=falta"); 
   exit;
 }
-else{
-  echo "aaa";
-}
-$iden =$_POST['nome'];
-$email = $_POST['email'];
+$ident =$_POST['ident'];
+$senha = $_POST['senha'];
 
-//Veririca se tem outro com o mesmo nome
-$stmt = $conn->prepare('SELECT * FROM usuario where nome like "' . $nome . '"');
+//Veririca se tem com esse nome ou email
+$achou = false;
+$stmt = $conn->prepare('SELECT * FROM usuario where nome like "' . $ident . '"');
 $stmt->execute();
-if(!($row = $stmt->fetch(PDO::FETCH_ASSOC))){
-  header("Location:login.php?erro=nenc"); 
-  exit;
+if(($row = $stmt->fetch(PDO::FETCH_ASSOC))){
+    $achou = true;
+    $senhacerta = $row['SENHA'];
+    $identipo = "nome";
+    $nivel = $row['NIVEL'];
+    $nome = $ident;
 }
-
-//Verifica se tem outro com o mesmo email
-$stmt = $conn->prepare('SELECT * FROM usuario where email like "' . $email . '"');
+$stmt = $conn->prepare('SELECT * FROM usuario where email like "' . $ident . '"');
 $stmt->execute();
 if($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-  header("Location:cadastro.php?erro=repemail"); 
-  exit;
+        $achou=true;
+        $senhacerta = $row['SENHA'];
+        $identipo = "email";
+        $nivel = $row['NIVEL'];
+        $nome = $row['NOME'];
+} 
+if (!$achou) {
+    header("Location:login.php?erro=nenc"); 
+    exit;
 }
-$nivel='user';
-$senha = password_hash($senha,PASSWORD_DEFAULT);
-$stmt = $conn->prepare('insert into usuario (nome, email ,senha,nivel) values ("'. $nome . '" , "'. $email . '" , "'. $senha . '" , '. $nivel .');');
-$stmt->execute();
 
-session_start();
-$_SESSION['nome'] = $nome;
-$_SESSION['nivel'] = $nivel;
+echo ($senhacerta);
+echo $senha;
+if( password_verify($senha,$senhacerta)){
+        $_SESSION['nome'] = $identipo;
+        $_SESSION['nivel'] = $nivel;
+}
+else {
+    header("Location:login.php?erro=senha"); 
+    exit;
+}
 
-header("Location:index.php"); 
-exit;
+ header("Location:index.php"); 
+ exit;
 
 ?>
