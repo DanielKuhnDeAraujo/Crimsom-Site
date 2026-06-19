@@ -29,10 +29,10 @@
 
     try {
         $sql = "SELECT * FROM usuario WHERE id = $id";
-        $query = $conexao->query($sql);
+        $query = $conn->query($sql);
 
         if ($query->num_rows > 0) {
-            $dados = $query->fetch_assoc();
+            $dados = $query->fetch();
             $NOME = $dados["NOME"];
             $EMAIL = $dados["EMAIL"];
             $SENHA = $dados["SENHA"];
