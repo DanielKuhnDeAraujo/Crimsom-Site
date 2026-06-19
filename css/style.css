@@ -182,12 +182,11 @@ footer p {
 }
 
 .rarity-ordinario {
-    background: #aaaaaa;
-    color: #fff0f0;
+    background: #8f8f8f;
+    color: #000000;
 }
 .rarity-excepcional {
     background: var(--color-crimson);
-    color: #fff0f0;
 }
 
 .rarity-elite {

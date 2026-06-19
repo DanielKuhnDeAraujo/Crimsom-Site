@@ -51,11 +51,38 @@
         </div>
     </div>
 
-        <div class="card-grid">
+
+     <form action="#" method="post">
+        <div class="toolbar">
+            <div class="search-wrap">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input type="search" name="filtro" maxlength="50" placeholder="Buscar por nome…"
+                    value="<?php echo isset($_POST['filtro']) ? htmlspecialchars($_POST['filtro']) : ''; ?>">
+            </div>
+            <button type="submit" class="btn-teal">Pesquisar</button>
+        </div>
+    </form>
+
+    <div class="card-grid">
         <?php
-        $stmt = $conn->prepare('SELECT * FROM cartas');
+        // Monta o SELECT com ou sem filtro de busca, usando parâmetros bindados (PDO)
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['filtro']) && trim($_POST['filtro']) !== '') {
+            $filtro = trim($_POST['filtro']);
+            $stmt = $conn->prepare('SELECT * FROM cartas WHERE nome LIKE :filtro ORDER BY nome');
+            $stmt->bindValue(':filtro', '%' . $filtro . '%', PDO::PARAM_STR);
+        } else {
+            $stmt = $conn->prepare('SELECT * FROM cartas ORDER BY nome');
+        }
         $stmt->execute();
-        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+        if ($stmt->rowCount() === 0) {
+            echo '<p>Nenhuma carta encontrada.</p>';
+        }
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         ?>
                 <div class="card-wrap">
                     <div class="card-header-bar">
@@ -82,103 +109,7 @@
                 </div>
             <?php
         }
-                ?>
-
-        <div class="card-wrap">
-            <div class="card-header-bar">
-                <span class="card-name">Sapo Gigante</span>
-                <span class="badge-rarity rarity-ordinario">Comum</span>
-            </div>
-            <div class="card-art">
-                <a href="#" class="card-art-link">
-                    <img src="img/logo.png" alt="Sapo Gigante+">
-                </a>
-            </div>
-            <div class="card-footer-bar">
-                <span class="card-edition">Coleção:</span>
-                <span class="card-price">R$ 12,90</span>
-            </div>
-            <div class="card-actions">
-                <div class="card-counter">
-                    <button class="counter-btn" onclick="changeQty(this, -1)">−</button>
-                    <span class="counter-qty">0</span>
-                    <button class="counter-btn" onclick="changeQty(this, 1)">+</button>
-                </div>
-                <button class="btn-lista">+Lista</button>
-            </div>
-        </div>
-
-        <div class="card-wrap">
-            <div class="card-header-bar">
-                <span class="card-name">Sapo Gigante+</span>
-                <span class="badge-rarity rarity-excepcional">Excepcional</span>
-            </div>
-            <div class="card-art">
-                <a href="#" class="card-art-link">
-                    <img src="img/logo.png" alt="Sapo Gigante+">
-                </a>
-            </div>
-            <div class="card-footer-bar">
-                <span class="card-edition">Coleção:</span>
-                <span class="card-price">R$ 89,90</span>
-            </div>
-            <div class="card-actions">
-                <div class="card-counter">
-                    <button class="counter-btn" onclick="changeQty(this, -1)">−</button>
-                    <span class="counter-qty">0</span>
-                    <button class="counter-btn" onclick="changeQty(this, 1)">+</button>
-                </div>
-                <button class="btn-lista">+Lista</button>
-            </div>
-        </div>
-
-        <div class="card-wrap">
-            <div class="card-header-bar">
-                <span class="card-name">Sapo Gigante+++</span>
-                <span class="badge-rarity rarity-elite">Elite</span>
-            </div>
-            <div class="card-art">
-                <a href="#" class="card-art-link">
-                    <img src="img/logo.png" alt="Sapo Gigante+++">
-                </a>
-            </div>
-            <div class="card-footer-bar">
-                <span class="card-edition">Coleção:</span>
-                <span class="card-price">R$ 199,90</span>
-            </div>
-            <div class="card-actions">
-                <div class="card-counter">
-                    <button class="counter-btn" onclick="changeQty(this, -1)">−</button>
-                    <span class="counter-qty">0</span>
-                    <button class="counter-btn" onclick="changeQty(this, 1)">+</button>
-                </div>
-                <button class="btn-lista">+Lista</button>
-            </div>
-        </div>
-
-        <div class="card-wrap">
-            <div class="card-header-bar">
-                <span class="card-name">Sapo Gigante++++</span>
-                <span class="badge-rarity rarity-unico">Único</span>
-            </div>
-            <div class="card-art">
-                <a href="#" class="card-art-link">
-                    <img src="img/logo.png" alt="Sapo Gigante++++">
-                </a>
-            </div>
-            <div class="card-footer-bar">
-                <span class="card-edition">Coleção:</span>
-                <span class="card-price">R$ 349,90</span>
-            </div>
-            <div class="card-actions">
-                <div class="card-counter">
-                    <button class="counter-btn" onclick="changeQty(this, -1)">−</button>
-                    <span class="counter-qty">0</span>
-                    <button class="counter-btn" onclick="changeQty(this, 1)">+</button>
-                </div>
-                <button class="btn-lista">+Lista</button>
-            </div>
-        </div>
+        ?>
 
     </div>
     <footer>
