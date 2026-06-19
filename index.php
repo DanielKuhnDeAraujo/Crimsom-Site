@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
- <?php include("conexao.php")?>
+<?php include("conexao.php") ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,45 +50,44 @@
                 <p>Jogue, compre cartas e divirta-se com o menor TCG brasileiro!</p>
             </div>
         </div>
-    </div>
 
-
-     <form action="#" method="post">
-        <div class="toolbar">
-            <div class="search-wrap">
-                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <circle cx="11" cy="11" r="8"/>
-                    <path d="m21 21-4.35-4.35"/>
-                </svg>
-                <input type="search" name="filtro" maxlength="50" placeholder="Buscar por nome…"
-                    value="<?php echo isset($_POST['filtro']) ? htmlspecialchars($_POST['filtro']) : ''; ?>">
+        <form action="#" method="post">
+            <div class="searchbar">
+                <div class="search-wrap">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35" />
+                    </svg>
+                    <input type="search" name="filtro" maxlength="50" placeholder="Buscar por nome…"
+                        value="<?php echo isset($_POST['filtro']) ? htmlspecialchars($_POST['filtro']) : ''; ?>">
+                </div>
+                <button type="submit" class="btn-search">Pesquisar</button>
             </div>
-            <button type="submit" class="btn-teal">Pesquisar</button>
-        </div>
-    </form>
+        </form>
 
-    <div class="card-grid">
-        <?php
-        // Monta o SELECT com ou sem filtro de busca, usando parâmetros bindados (PDO)
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['filtro']) && trim($_POST['filtro']) !== '') {
-            $filtro = trim($_POST['filtro']);
-            $stmt = $conn->prepare('SELECT * FROM cartas WHERE nome LIKE :filtro ORDER BY nome');
-            $stmt->bindValue(':filtro', '%' . $filtro . '%', PDO::PARAM_STR);
-        } else {
-            $stmt = $conn->prepare('SELECT * FROM cartas ORDER BY nome');
-        }
-        $stmt->execute();
+        <div class="card-grid">
+            <?php
+            // Monta o SELECT com ou sem filtro de busca, usando parâmetros bindados (PDO)
+            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['filtro']) && trim($_POST['filtro']) !== '') {
+                $filtro = trim($_POST['filtro']);
+                $stmt = $conn->prepare('SELECT * FROM cartas WHERE nome LIKE :filtro ORDER BY nome');
+                $stmt->bindValue(':filtro', '%' . $filtro . '%', PDO::PARAM_STR);
+            } else {
+                $stmt = $conn->prepare('SELECT * FROM cartas ORDER BY nome');
+            }
+            $stmt->execute();
 
-        if ($stmt->rowCount() === 0) {
-            echo '<p>Nenhuma carta encontrada.</p>';
-        }
+            if ($stmt->rowCount() === 0) {
+                echo '<p>Nenhuma carta encontrada.</p>';
+            }
 
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        ?>
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                ?>
                 <div class="card-wrap">
                     <div class="card-header-bar">
                         <span class="card-name"><?= htmlspecialchars($row['NOME']) ?></span>
-                        <span class="badge-rarity rarity-<?= htmlspecialchars($row['RARIDADE']) ?>"><?= htmlspecialchars($row['RARIDADE']) ?></span>
+                        <span
+                            class="badge-rarity rarity-<?= htmlspecialchars($row['RARIDADE']) ?>"><?= htmlspecialchars($row['RARIDADE']) ?></span>
                     </div>
                     <div class="card-art">
                         <a href="#" class="card-art-link">
@@ -107,13 +107,14 @@
                         <button class="btn-lista">+Lista</button>
                     </div>
                 </div>
-            <?php
-        }
-        ?>
+                <?php
+            }
+            ?>
 
+        </div>
     </div>
-    <footer>
-        <div class="container">
+    <footer class="">
+        <div class="container ">
             <p>&copy; 2026 Crimsom Beast. Todos os direitos reservados.</p>
         </div>
     </footer>
