@@ -1,6 +1,5 @@
 create database crimsom;
 use crimsom;
---tabela das cartas
 
 CREATE TABLE IF NOT EXISTS cartas (
     ID_CARTA INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -13,8 +12,6 @@ CREATE TABLE IF NOT EXISTS cartas (
     ID2 INT NOT NULL,
     PRECO DECIMAL(10, 2) NOT NULL
 ) DEFAULT CHARSET=utf8;
-
---tabela usuario
 
 CREATE TABLE IF NOT EXISTS usuario (
     ID_USUARIO INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
