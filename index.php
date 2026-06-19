@@ -51,8 +51,7 @@
         </div>
     </div>
 
-    <div class="card-grid">
-
+        <div class="card-grid">
         <?php
         $stmt = $conn->prepare('SELECT * FROM cartas');
         $stmt->execute();
