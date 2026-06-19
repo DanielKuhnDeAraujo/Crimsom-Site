@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -28,7 +30,7 @@
 
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <a class="ms-2 navbar-brand" href="home.php">
+            <a class="ms-2 navbar-brand" href="index.php">
                 <img src="img/logo.png" alt="Logo" width="60" height="50" class="d-inline-block align-itens-end">
                 <b>Crimsom Beast</b>
             </a>

@@ -30,7 +30,7 @@
 <body>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <a class="ms-2 navbar-brand" href="home.php">
+            <a class="ms-2 navbar-brand" href="index.php">
                 <img src="img/logo.png" alt="Logo" width="60" height="50" class="d-inline-block align-itens-end">
                 <b>Crimsom Beast</b>
             </a>
@@ -54,6 +54,11 @@
             <p class="form-subtitle">Preencha os campos abaixo para acessar sua conta.</p>
 
             <form action="login_action.php" method="POST">
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" placeholder="Nome de Usuário" required>
+                </div>
+
                 <div class="form-group">
                     <label for="email">E-mail</label>
                     <input type="email" id="email" name="email" placeholder="seu@email.com" required>

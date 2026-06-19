@@ -1,3 +1,5 @@
+create database crimsom;
+use crimsom;
 --tabela das cartas
 
 CREATE TABLE IF NOT EXISTS cartas (
@@ -19,4 +21,7 @@ CREATE TABLE IF NOT EXISTS usuario (
     NOME VARCHAR(50) NOT NULL,
     EMAIL VARCHAR(100) UNIQUE NOT NULL,
     SENHA VARCHAR(255) NOT NULL
+    NIVEL VARCHAR(10) NOT NULL,
 );
+
+INSERT INTO cartas(NOME,IMAGEM,SANGUE,RARIDADE,LENDARIO,COLECAO,ID2,PRECO)values("teste","logo.png","1","Elite",'n',"TST",1,100);
