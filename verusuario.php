@@ -12,6 +12,10 @@
 <body>
     <?php include("conexao.php") ?>
     <?php include("navbar.php") ?>
+    <a href="logout.php">
+        <button type="button">Sair</button>
+    </a>
+
     <?php
 
     try {
@@ -29,7 +33,7 @@
             throw new Exception("O seu perfil não foi encontrado");
         }
 
-    }catch (Exception $e ){
+    } catch (Exception $e) {
         echo "<main class='container' style='padding-top:40px'>
                 <div class='alert alert-danger'>{$e->getMessage()}</div>
                 <a href='index.php' class='btn btn-primary'>Voltar</a>
@@ -39,10 +43,10 @@
 
     ?>
 
-    <main class="container">
-        
+    <main class="page-wrap">
+
     </main>
-    
+
 </body>
 
 </html>
