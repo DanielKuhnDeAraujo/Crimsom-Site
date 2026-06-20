@@ -208,16 +208,7 @@
     </style>
 </head>
 <body>
-
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="ms-2 navbar-brand" href="index.php">
-                <img src="img/logo.png" alt="Logo" width="60" height="50" class="d-inline-block align-itens-end">
-                <b>Crimsom Beast</b>
-            </a>
-        </div>
-    </nav>
-
+    <?php include("navbar.php");?>
     <main class="page-wrap">
         <div style="height:1.75rem"></div>
 
