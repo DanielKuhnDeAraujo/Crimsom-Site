@@ -18,7 +18,8 @@ if(isset($_SESSION['nome'])){
                         }
                     ?>">
                 <img src="img/login.png " alt="Logo" width="45" height="45" class="d-inline-block align-itens-end ">
-                <h7>
+                <h7 style= "font-size: 1.2rem;
+            font-weight: bold;"> 
                     <?php 
                         if ($logado){
                             echo $nome;

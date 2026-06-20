@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+<?php
 
+session_start();?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,14 +19,18 @@
     </a>
 
     <?php
-
+    if (isset($_SESSION['nome'])){
+        $nomelog = $_SESSION['nome'];
+    }
+    else {
+        header("Location:login.php");
+    }
     try {
-        $sql = "SELECT * FROM usuario WHERE id = :id";
+        $sql = "SELECT * FROM usuario WHERE nome = :nome";
         $query = $conn->prepare($sql);
-        $query->execute(['id' => $id]);
-
-        if ($query->num_rows > 0) {
-            $dados = $query->fetch(PDO::FETCH_ASSOC);
+        $query->execute(['nome' => $nomelog]);
+        
+        if ($dados = $query->fetch(PDO::FETCH_ASSOC)) {
             $NOME = $dados["NOME"];
             $EMAIL = $dados["EMAIL"];
             $SENHA = $dados["SENHA"];
