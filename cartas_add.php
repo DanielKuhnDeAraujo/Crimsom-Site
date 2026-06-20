@@ -249,7 +249,7 @@
             <!-- DIREITA: formulário -->
             <div class="form-side">
                 <div class="form-wrap">
-                    <p class="form-title mb-5">Novo Card</p>
+                    <p class="form-title mb-5">Novo carta</p>
 
                     <form action="cadastrar.php" method="POST" enctype="multipart/form-data">
 
@@ -258,7 +258,7 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="nome">Nome</label>
-                                <input type="text" id="nome" name="nome" placeholder="Nome do card" required>
+                                <input type="text" id="nome" name="nome" placeholder="Nome da carta" required>
                             </div>
                             <div class="form-group">
                                 <label for="id2">ID Secundário</label>

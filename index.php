@@ -27,6 +27,22 @@ session_start(); ?>
             font-size: 1.2rem;
             font-weight: bold;
         }
+
+        .card-art-link {
+            margin: 0;
+        }
+
+        .card-art-btn {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: none;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+            display: block;
+        }
+        
     </style>
 </head>
 
@@ -53,7 +69,7 @@ session_start(); ?>
                 </div>
                 <button type="submit" class="btn-toolbar">Pesquisar</button>
             </form>
-            <?php if ($_SESSION['nivel'] = 'adm'): ?>
+            <?php if (isset($_SESSION['nivel']) && $_SESSION['nivel'] === 'adm'): ?>
                 <a href="cartas_add.php" class="btn-toolbar">
                     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path d="M12 5v14M5 12h14" />
@@ -89,9 +105,12 @@ session_start(); ?>
                             class="badge-rarity rarity-<?= htmlspecialchars($row['RARIDADE']) ?>"><?= htmlspecialchars($row['RARIDADE']) ?></span>
                     </div>
                     <div class="card-art">
-                        <a href="#" class="card-art-link">
-                            <img src="img/logo.png" alt="Sapo Gigante+">
-                        </a>
+                        <form action="vercarta.php" method="POST" class="card-art-link">
+                            <input type="hidden" name="id_carta" value="<?= (int) $row['ID_CARTA'] ?>">
+                            <button type="submit" class="card-art-btn">
+                                <img src="img/logo.png" alt="<?= htmlspecialchars($row['NOME']) ?>">
+                            </button>
+                        </form>
                     </div>
                     <div class="card-footer-bar">
                         <span class="card-edition">Coleção: <?= htmlspecialchars($row['COLECAO']) ?></span>
@@ -129,5 +148,4 @@ session_start(); ?>
         qtyEl.classList.toggle('counter-qty--active', qty > 0);
     }
 </script>
-
 </html>
