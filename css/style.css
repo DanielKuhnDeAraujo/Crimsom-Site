@@ -71,9 +71,9 @@ body {
 
 /*Tipo article so que sem ser, apenas o conteudo principal da pagina(sem footer nav e afins)*/
 .page-wrap {
-    max-width: 1100px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 2rem 1.5rem;
+    padding: 2rem .75rem;
     flex: 1;
 }
 
@@ -104,11 +104,10 @@ body {
 
 /* cards */
 .card-grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    justify-content: center;
-    align-items: center;
+    align-items: stretch;
 }
 
 .card {
@@ -146,7 +145,7 @@ footer p {
 
 /* === CARD WRAP === */
 .card-wrap {
-    width: 260px;
+    width: 100%;
     border-radius: 16px;
     border: 1.5px solid var(--color-crimson-dark);
     background: var(--bg-card);
@@ -461,14 +460,22 @@ footer p {
     text-decoration: underline;
 }
 
-/*Search Bar*/
-.searchbar {
+/*Toolbar (search + add card)*/
+.toolbar {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: .75rem;
     flex-wrap: wrap;
     margin-bottom: 1.5rem;
     margin-top: 1rem;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    flex: 1;
 }
 
 .search-wrap {
@@ -484,22 +491,6 @@ footer p {
     max-width: 380px;
     transition: border-color .15s, box-shadow .25s;
 }
-
-.btn-search {
-    display: inline-flex;
-    padding: .55rem 1.2rem;
-    background: var(--color-crimson);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    letter-spacing: 0.3px;
-    transition: background 0.3s;
-    margin-top: 0.5rem;
-}
-
 
 .search-wrap:focus-within {
     border-color: var(--color-crimson);
@@ -523,4 +514,27 @@ footer p {
 
 .search-wrap input::placeholder {
     color: var(--text-muted-light);
+}
+
+.btn-toolbar {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .55rem 1.2rem;
+    background: var(--color-crimson);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.3s;
+}
+
+.btn-toolbar:hover {
+    background: var(--color-crimson-light);
+    color: #fff;
 }

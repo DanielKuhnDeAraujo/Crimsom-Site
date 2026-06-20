@@ -41,8 +41,8 @@ session_start(); ?>
             </div>
         </div>
 
-        <form action="#" method="post">
-            <div class="searchbar">
+        <div class="toolbar">
+            <form action="#" method="post" class="search-form">
                 <div class="search-wrap">
                     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <circle cx="11" cy="11" r="8" />
@@ -51,9 +51,15 @@ session_start(); ?>
                     <input type="search" name="filtro" maxlength="50" placeholder="Buscar por nome…"
                         value="<?php echo isset($_POST['filtro']) ? htmlspecialchars($_POST['filtro']) : ''; ?>">
                 </div>
-                <button type="submit" class="btn-search">Pesquisar</button>
-            </div>
-        </form>
+                <button type="submit" class="btn-toolbar">Pesquisar</button>
+            </form>
+            <a href="cartas_add.php" class="btn-toolbar">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M12 5v14M5 12h14" />
+                </svg>
+                Adicionar Carta
+            </a>
+        </div>
 
         <div class="card-grid">
             <?php
