@@ -37,7 +37,7 @@ if (!$achou) {
 echo ($senhacerta);
 echo $senha;
 if( password_verify($senha,$senhacerta)){
-        $_SESSION['nome'] = $ident;
+        $_SESSION['nome'] = $nome;
         $_SESSION['nivel'] = $nivel;
 }
 else {
