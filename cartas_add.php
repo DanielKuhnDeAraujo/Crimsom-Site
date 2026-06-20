@@ -297,7 +297,6 @@
                                     <option value="ordinario">Ordinário</option>
                                     <option value="excepcional">Excepcional</option>
                                     <option value="elite">Elite</option>
-                                    <option value="legendary">Lendário</option>
                                     <option value="unico">Único</option>
                                 </select>
                             </div>
