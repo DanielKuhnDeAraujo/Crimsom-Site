@@ -11,7 +11,7 @@
 
 <body>
     <?php include("conexao.php") ?>
-    <?php include("navbar.php");?>
+    <?php include("navbar.php") ?>
     <?php
 
     try {

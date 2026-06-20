@@ -12,7 +12,7 @@ if(isset($_SESSION['nome'])){
             </a>
             <a class="navbar-brand me-5" href="<?php 
                         if ($logado){
-                            echo "#";
+                            echo "verusuario.php";
                         }else {
                             echo "login.php";
                         }
