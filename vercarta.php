@@ -25,48 +25,172 @@ $id = $_SESSION['view_id'];
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
-        .page-header p {
-            font-size: .95rem;
-        }
+        /* ============================================
+   PÁGINA DE DETALHE DA CARTA (vercarta.php)
+   ============================================ */
 
-        h7 {
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
+.carta-layout {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;          /* permite quebra em telas menores */
+    align-items: stretch;      /* faz os filhos terem a mesma altura */
+    justify-content: center;
+    gap: 2rem;
+}
 
-        img.foto {
-            width: 300px;
-        }
+/* Imagem – responsiva e com altura igual ao form */
+.carta-imagem-box {
+    flex: 0 1 280px;          /* base de 280px, pode encolher até um mínimo */
+    min-width: 100px;
+    max-width: 100%;
+    border: 3px solid #000;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #0d0305;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .card-art-link {
-            margin: 0;
-        }
+.carta-imagem-box img {
+    width: 100%;
+    height: 100%;
+}
 
-        .card-art-btn {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: none;
-            padding: 0;
-            margin: 0;
-            cursor: pointer;
-            display: block;
-        }
+/* Painel do formulário – fundo escuro, textos claros */
+.carta-info-panel {
+    flex: 2 1 230px;          /* ocupa mais espaço, base de 380px */
+    min-width: 100px;
+    max-width: 400px;
+    margin: 0;
+    background: var(--bg-card);   /* #1c1c1c */
+    border: 1.5px solid var(--color-crimson-dark);
+    border-radius: 16px;
+    padding: 1.5rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+}
 
-        .page-wrap {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 2rem .75rem;
-            flex: 1;
-        }
+/* Títulos e labels – brancos */
+.carta-info-panel .form-title {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 1.25rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.carta-info-panel .form-group label {
+    color: #cccccc;
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Valores estáticos – fundo levemente mais claro, texto branco */
+.carta-info-panel .form-static {
+    background: #2a2a2a;
+    border: 1px solid #3a3a3a;
+    color: #ffffff;
+    min-height: 38px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+}
+
+/* Grade de campos em 2 colunas */
+.carta-info-panel .form-fields-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.carta-info-panel .form-fields-grid .form-group {
+    margin-bottom: 0;
+}
+
+/* Ações (contador + botão) */
+.carta-info-panel .card-actions {
+    margin: 0 0 0.5rem 0;
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.carta-info-panel .form-footer-link {
+    margin-top: 0.5rem;
+    color: #aaa;
+    text-align: center;
+}
+
+.carta-info-panel .form-footer-link a {
+    color: var(--color-crimson-light);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.carta-info-panel .form-footer-link a:hover {
+    text-decoration: underline;
+}
+
+/* Divisor */
+.carta-info-panel .form-divider {
+    background: #3a3a3a;
+    height: 1px;
+    margin: 1rem 0;
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 780px) {
+    .carta-layout {
+        flex-direction: column;   /* empilha verticalmente */
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .carta-imagem-box {
+        flex: 0 0 auto;
+        width: 200px;
+        height: 200px;           /* mantém quadrado */
+        max-width: 60%;
+    }
+
+    .carta-info-panel {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 500px;
+        padding: 1.25rem;
+    }
+
+    .carta-info-panel .form-fields-grid {
+        grid-template-columns: 1fr;  /* vira uma coluna */
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .carta-imagem-box {
+        width: 140px;
+        height: 140px;
+        max-width: 80%;
+    }
+
+    .carta-info-panel {
+        padding: 1rem;
+    }
+}
     </style>
 </head>
 
 <body>
+
     <?php
     include("navbar.php");
 
-    // pega via PDO usando o id da sessão
+    // Consulta segura via PDO com parâmetro bindado, usando o id guardado na sessão
     $sql = 'SELECT * FROM cartas WHERE id_CARTA = :id';
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
@@ -88,45 +212,77 @@ $id = $_SESSION['view_id'];
     }
     ?>
     <div class="page-wrap">
-        <div class="card-wrap">
-            <div class="card-header-bar">
-                <span class="card-name">
-                    <h4 class="card-title">
-                        <?php echo htmlspecialchars($nome ?? '') ?>
-                    </h4>
-                </span>
-                <span class="badge-rarity rarity-<?php echo htmlspecialchars($raridade) ?>"></span>
+        <?php if ($stmt->rowCount() === 0): ?>
+            <div class="carta-nao-encontrada">
+                <p>Nenhuma carta encontrada.</p>
+                <a href="index.php" class="form-footer-link">← Voltar para a lista</a>
             </div>
-            <div class=" card-art">
-                <form action="vercarta.php" method="POST" class="card-art-link">
-                    <input type="hidden" name="id_carta" value="<?= (int) $row['ID_CARTA'] ?>">
-                    <button type="submit" class="card-art-btn">
-                        <img src="<?php echo htmlspecialchars($imagem ?? 'img/logo.png') ?>" class="foto"
-                            alt="<?php echo htmlspecialchars($nome ?? '') ?>">">
-                    </button>
-                </form>
-            </div>
-            <div class="card-footer-bar">
-                <span class="card-edition">Coleção: <?= htmlspecialchars($colecao) ?></span>
-                <span class="card-price">R$: <?= htmlspecialchars($preco) ?></span>
-            </div>
-            <div class="card-actions">
-                <div class="card-counter">
-                    <button class="counter-btn" onclick="changeQty(this, -1)">−</button>
-                    <span class="counter-qty">0</span>
-                    <button class="counter-btn" onclick="changeQty(this, 1)">+</button>
+        <?php else: ?>
+            <div class="carta-layout">
+
+                <!-- Imagem da carta (esquerda) -->
+                <div class="carta-imagem-box">
+                    <img src="<?php echo htmlspecialchars($imagem ?? 'img/SemImagem.png') ?>"
+                         alt="<?php echo htmlspecialchars($nome ?? 'Sem nome') ?>">
                 </div>
-                <button class="btn-lista">+Lista</button>
+
+                <!-- Informações da carta (direita) -->
+                <div class="carta-info-panel form-wrap">
+                    <p class="form-title">Detalhes da carta</p>
+
+                    <div class="form-fields-grid">
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <div class="form-static"><?php echo htmlspecialchars($nome ?? '') ?></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Raridade</label>
+                            <div class="form-static"><?php echo htmlspecialchars($raridade ?? '') ?></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Lendário</label>
+                            <div class="form-static"><?php echo $lendariotext ? 'Sim' : 'Não' ?></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Sangue</label>
+                            <div class="form-static"><?php echo htmlspecialchars($sangue ?? '') ?></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Coleção</label>
+                            <div class="form-static"><?php echo htmlspecialchars($colecao ?? '') ?></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Preço</label>
+                            <div class="form-static">R$ <?php echo number_format($preco ?? 0, 2, ",", ".") ?></div>
+                        </div>
+                    </div>
+
+                    <div class="form-divider"></div>
+
+                    <div class="card-actions">
+                        <div class="card-counter">
+                            <button class="counter-btn" onclick="changeQty(this, -1)">−</button>
+                            <span class="counter-qty">0</span>
+                            <button class="counter-btn" onclick="changeQty(this, 1)">+</button>
+                        </div>
+                        <button class="btn-lista">+Lista</button>
+                    </div>
+
+                    <div class="form-footer-link">
+                        <a href="index.php">← Voltar para a lista</a>
+                    </div>
+                </div>
+
             </div>
-        </div>
+        <?php endif; ?>
     </div>
     <footer class="">
-        <div class="container">
+        <div class="container ">
             <p>&copy; 2026 Crimsom Beast. Todos os direitos reservados.</p>
         </div>
     </footer>
-</body>
 
+</body>
 <script src="script.js"></script>
 <script>
     function changeQty(btn, delta) {
