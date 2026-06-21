@@ -10,16 +10,14 @@ session_start(); ?>
     <title>Crimsom Beast</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+
+    </style>
 </head>
 
 <body>
     <?php include("conexao.php") ?>
     <?php include("navbar.php") ?>
-    <a href="logout.php">
-        <button type="button">Sair</button>
-    </a>
-
-
 
     <?php
     if (isset($_SESSION['nome'])) {
@@ -53,7 +51,7 @@ session_start(); ?>
 
 
     <?php
-    
+
     $msg_sucesso = null;
     $msg_erro_email = null;
     $msg_erro_senha = null;
@@ -85,7 +83,7 @@ session_start(); ?>
     ?>
 
     <?php
-    
+
     try {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['acao']) && $_POST['acao'] === 'trocar_senha') {
 
@@ -137,49 +135,45 @@ session_start(); ?>
 
     ?>
 
-    <div class="container">
-
-        <div class="row mt-5">
-
-            <div class="col-md-4">
-
-                <a href="index.php" class="btn btn-danger mt-3">Voltar para a loja</a>
-
-                <h2 class="mb-3 mt-3">Meu Perfil</h2>
-
-                <?php if (isset($erro)): ?>
-                    <div class="alert alert-danger"><?= htmlspecialchars($erro) ?></div>
-                <?php else: ?>
-
-                    <h5 class="card-title"><?= htmlspecialchars($NOME) ?></h5>
-                    <span class="badge bg-secondary mb-3"><?= htmlspecialchars($NIVEL) ?></span>
-
-                    <table class="mb-3 mt-3">
-                        <tr>
-                            <th>Nome:</th>
-                            <td><?= htmlspecialchars($NOME) ?></td>
-                        </tr>
-                        <tr>
-                            <th>Email:</th>
-                            <td><?= htmlspecialchars($EMAIL) ?></td>
-                        </tr>
-                        <tr>
-                            <th>Nível:</th>
-                            <td><?= htmlspecialchars($NIVEL) ?></td>
-                        </tr>
-                    </table>
-
-                <?php endif; ?>
-
-
-                <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal"
-                    data-bs-target="#modalEmail">Mudar email</button>
-
-                <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal"
-                    data-bs-target="#modalSenha">Mudar senha</button>
-
-            </div>
+    <div class="page-wrap">
+        <div class="page-header">
+            <h1>Meu Perfil</h1>
         </div>
+
+        <div class="toolbar">
+            <form action="#" method="post" class="search-form">
+                <a class="btn-toolbar" href="index.php">Voltar a loja</a>
+                <a class="btn-toolbar" href="logout.php">Sair</a>
+            </form>
+        </div>
+        <?php if (isset($erro)): ?>
+            <div class="alert alert-danger"><?= htmlspecialchars($erro) ?></div>
+        <?php else: ?>
+            <h5 class="card-title"><?= htmlspecialchars($NOME) ?></h5>
+            <span class="badge bg-secondary mb-3"><?= htmlspecialchars($NIVEL) ?></span>
+            <table class="mb-3 mt-3">
+                <tr>
+                    <th>Nome:</th>
+                    <td><?= htmlspecialchars($NOME) ?></td>
+                </tr>
+                <tr>
+                    <th>Email:</th>
+                    <td><?= htmlspecialchars($EMAIL) ?></td>
+                </tr>
+                <tr>
+                    <th>Nível:</th>
+                    <td><?= htmlspecialchars($NIVEL) ?></td>
+                </tr>
+            </table>
+
+        <?php endif; ?>
+
+
+        <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#modalEmail">Mudar
+            email</button>
+
+        <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#modalSenha">Mudar
+            senha</button>
     </div>
 
     <div class="modal fade" id="modalEmail" tabindex="-1" aria-labelledby="modalEmailLabel" aria-hidden="true">
