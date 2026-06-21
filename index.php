@@ -108,7 +108,7 @@ session_start(); ?>
                         <form action="vercarta.php" method="POST" class="card-art-link">
                             <input type="hidden" name="id_carta" value="<?= (int) $row['ID_CARTA'] ?>">
                             <button type="submit" class="card-art-btn">
-                                <img src="<?= htmlspecialchars($row['IMAGEM']) ?>" alt="<?= htmlspecialchars($row['NOME']) ?>">
+                                <img src="img/<?= htmlspecialchars($row['IMAGEM']) ?>" alt="<?= htmlspecialchars($row['NOME']) ?>">
                             </button>
                         </form>
                     </div>

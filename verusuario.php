@@ -11,7 +11,189 @@ session_start(); ?>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
+        .page-header {
+            margin-left: -1rem;
+            gap: 1;
+        }
 
+        .toolbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        .search-form {
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 0;
+        }
+
+        .carta-layout {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: stretch;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        /* Imagem*/
+        .carta-imagem-box {
+            flex: 0 1 280px;
+            /* base de 280px, pode encolher até um mínimo */
+            min-width: 100px;
+            max-width: 100%;
+            border: 3px solid #000;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carta-imagem-box img {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Painel do formulário*/
+        .carta-info-panel {
+            flex: 2 1 280px;
+            /* ocupa mais espaço, base de 380px */
+            min-width: 200px;
+            max-width: 500px;
+            margin: 0;
+            background: var(--bg-card);
+            /* #1c1c1c */
+            border: 1.5px solid var(--color-crimson-dark);
+            border-radius: 16px;
+            padding: 1.5rem 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Títulos e labels*/
+        .carta-info-panel .form-title {
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 1.25rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .carta-info-panel .form-group label {
+            color: #cccccc;
+            font-weight: 600;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Valores estáticos*/
+        .carta-info-panel .form-static {
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            color: #ffffff;
+            min-height: 38px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Grade de campos em 2 colunas */
+        .carta-info-panel .form-fields-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .carta-info-panel .form-fields-grid .form-group {
+            margin-bottom: 0;
+        }
+
+        /* Ações (contador + botão) */
+        .carta-info-panel .card-actions {
+            margin: 0 0 0.5rem 0;
+            gap: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .carta-info-panel .form-footer-link {
+            margin-top: 0.5rem;
+            color: #aaa;
+            text-align: center;
+        }
+
+        .carta-info-panel .form-footer-link a {
+            color: var(--color-crimson-light);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .carta-info-panel .form-footer-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Divisor */
+        .carta-info-panel .form-divider {
+            background: #3a3a3a;
+            height: 1px;
+            margin: 1rem 0;
+        }
+
+        /*Responvidade*/
+        @media (max-width: 780px) {
+            .carta-layout {
+                flex-direction: column;
+                /* empilha verticalmente */
+                align-items: center;
+                gap: 1.5rem;
+            }
+
+            .carta-imagem-box {
+                flex: 0 0 auto;
+                width: 200px;
+                height: 200px;
+                /* mantém quadrado */
+                max-width: 60%;
+            }
+
+            .carta-info-panel {
+                flex: 0 0 auto;
+                width: 100%;
+                max-width: 500px;
+                padding: 1.25rem;
+            }
+
+            .carta-info-panel .form-fields-grid {
+                grid-template-columns: 1fr;
+                /* vira uma coluna */
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carta-imagem-box {
+                width: 140px;
+                height: 140px;
+                max-width: 80%;
+            }
+
+            .carta-info-panel {
+                padding: 1rem;
+            }
+        }
+
+        .container-wrap {
+            flex: 1;
+            padding: 2rem .75rem;
+        }
     </style>
 </head>
 
@@ -135,13 +317,13 @@ session_start(); ?>
 
     ?>
 
-    <div class="page-wrap">
+    <div class="container-wrap">
         <div class="page-header">
             <h1>Meu Perfil</h1>
         </div>
 
         <div class="toolbar">
-            <form action="#" method="post" class="search-form">
+            <form class="search-form">
                 <a class="btn-toolbar" href="index.php">Voltar a loja</a>
                 <a class="btn-toolbar" href="logout.php">Sair</a>
             </form>
@@ -149,9 +331,43 @@ session_start(); ?>
         <?php if (isset($erro)): ?>
             <div class="alert alert-danger"><?= htmlspecialchars($erro) ?></div>
         <?php else: ?>
-            <h5 class="card-title"><?= htmlspecialchars($NOME) ?></h5>
-            <span class="badge bg-secondary mb-3"><?= htmlspecialchars($NIVEL) ?></span>
-            <table class="mb-3 mt-3">
+            <div class="carta-layout">
+                <!-- Informações da carta (direita) -->
+                <div class="carta-info-panel form-wrap">
+                    <h5 class="form-title"> <?= htmlspecialchars($NOME) ?>
+                    <span class="badge bg-secondary"><?= htmlspecialchars($NIVEL) ?></span>
+                    </h5>
+
+                    <div class="perfil-campos" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div class="form-group" style="flex: 1; min-width: 140px;">
+                            <label>Nome</label>
+                            <div class="form-static"><?= htmlspecialchars($NOME ?? '') ?></div>
+                        </div>
+                        <div class="form-group" style="flex: 1; min-width: 140px;">
+                            <label>Email</label>
+                            <div class="form-static"><?= htmlspecialchars($EMAIL ?? '') ?></div>
+                        </div>
+                        <div class="form-group" style="flex: 1; min-width: 140px;">
+                            <label>Nível de acesso</label>
+                            <div class="form-static"><?= htmlspecialchars($NIVEL ?? 'user') ?></div>
+                        </div>
+                    </div>
+
+                    <div class="form-divider"></div>
+
+                    <!-- Botões lado a lado -->
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#modalEmail">Mudar email</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#modalSenha">Mudar senha</button>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <!-- <h5 class="card-title"> <?= htmlspecialchars($NOME) ?>
+                <span class="badge bg-secondary"><?= htmlspecialchars($NIVEL) ?></span>
+            </h5>
+            <table class="mb-3 mt-2">
                 <tr>
                     <th>Nome:</th>
                     <td><?= htmlspecialchars($NOME) ?></td>
@@ -164,17 +380,11 @@ session_start(); ?>
                     <th>Nível:</th>
                     <td><?= htmlspecialchars($NIVEL) ?></td>
                 </tr>
-            </table>
-
-        <?php endif; ?>
-
-
-        <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#modalEmail">Mudar
-            email</button>
-
-        <button type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#modalSenha">Mudar
-            senha</button>
+            </table>*/ -->
+        </div>
     </div>
+    </div>
+
 
     <div class="modal fade" id="modalEmail" tabindex="-1" aria-labelledby="modalEmailLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -239,8 +449,9 @@ session_start(); ?>
             </form>
         </div>
     </div>
-        <footer class="">
-        <div class="container ">
+
+    <footer class="">
+        <div class="container-fluid">
             <p>&copy; 2026 Crimsom Beast. Todos os direitos reservados.</p>
         </div>
     </footer>

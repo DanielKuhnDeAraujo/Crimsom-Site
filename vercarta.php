@@ -25,11 +25,6 @@ $id = $_SESSION['view_id'];
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
-        .page-wrap {
-            max-width: 100%;
-            margin: 0 auto;
-        }
-
         .carta-layout {
             display: flex;
             flex-direction: row;
@@ -48,7 +43,7 @@ $id = $_SESSION['view_id'];
             border: 3px solid #000;
             border-radius: 12px;
             overflow: hidden;
-            background: #0d0305;
+            background: #000000;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -63,7 +58,7 @@ $id = $_SESSION['view_id'];
         .carta-info-panel {
             flex: 2 1 250px;
             /* ocupa mais espaço, base de 380px */
-            min-width: 100px;
+            min-width: 200px;
             max-width: 500px;
             margin: 0;
             background: var(--bg-card);
@@ -147,7 +142,7 @@ $id = $_SESSION['view_id'];
             margin: 1rem 0;
         }
 
-        /* ===== Responsividade ===== */
+        /*Responvidade*/
         @media (max-width: 780px) {
             .carta-layout {
                 flex-direction: column;
@@ -189,6 +184,10 @@ $id = $_SESSION['view_id'];
                 padding: 1rem;
             }
         }
+        .container-wrap{
+            flex: 1;
+            padding: 2rem .75rem;
+        }
     </style>
 </head>
 
@@ -218,7 +217,7 @@ $id = $_SESSION['view_id'];
         $preco = $dados['PRECO'];
     }
     ?>
-    <div class="page-wrap">
+    <div class="container-wrap mt-4">
         <?php if ($stmt->rowCount() === 0): ?>
             <div class="carta-nao-encontrada">
                 <p>Nenhuma carta encontrada.</p>

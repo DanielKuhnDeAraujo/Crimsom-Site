@@ -8,7 +8,7 @@ if(isset($_SESSION['nome'])){
         <div class="container-fluid">
             <a class="ms-2 navbar-brand" href="index.php">
                 <img src="img/logo.png" alt="Logo" width="60" height="50" class="d-inline-block align-itens-end">
-                <b>Crimsom Beast</b>
+                <b>Crimsom Beasts</b>
             </a>
             <a class="navbar-brand me-5" href="<?php 
                         if ($logado){
