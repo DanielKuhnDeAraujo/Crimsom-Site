@@ -262,7 +262,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="id2">ID Secundário</label>
-                                <input type="number" id="id2" name="id2" placeholder="ex: 0042">
+                                <input type="number" id="id2" name="id2" min="0" placeholder="ex: 0042">
                             </div>
                         </div>
 
