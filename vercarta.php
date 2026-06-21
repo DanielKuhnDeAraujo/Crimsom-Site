@@ -25,163 +25,170 @@ $id = $_SESSION['view_id'];
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
-        /* ============================================
-   PÁGINA DE DETALHE DA CARTA (vercarta.php)
-   ============================================ */
+        .page-wrap {
+            max-width: 100%;
+            margin: 0 auto;
+        }
 
-.carta-layout {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;          /* permite quebra em telas menores */
-    align-items: stretch;      /* faz os filhos terem a mesma altura */
-    justify-content: center;
-    gap: 2rem;
-}
+        .carta-layout {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: stretch;
+            justify-content: center;
+            gap: 2rem;
+        }
 
-/* Imagem – responsiva e com altura igual ao form */
-.carta-imagem-box {
-    flex: 0 1 280px;          /* base de 280px, pode encolher até um mínimo */
-    min-width: 100px;
-    max-width: 100%;
-    border: 3px solid #000;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #0d0305;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        /* Imagem*/
+        .carta-imagem-box {
+            flex: 0 1 280px;
+            /* base de 280px, pode encolher até um mínimo */
+            min-width: 100px;
+            max-width: 100%;
+            border: 3px solid #000;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #0d0305;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.carta-imagem-box img {
-    width: 100%;
-    height: 100%;
-}
+        .carta-imagem-box img {
+            width: 100%;
+            height: 100%;
+        }
 
-/* Painel do formulário – fundo escuro, textos claros */
-.carta-info-panel {
-    flex: 2 1 230px;          /* ocupa mais espaço, base de 380px */
-    min-width: 100px;
-    max-width: 400px;
-    margin: 0;
-    background: var(--bg-card);   /* #1c1c1c */
-    border: 1.5px solid var(--color-crimson-dark);
-    border-radius: 16px;
-    padding: 1.5rem 2rem 2rem;
-    display: flex;
-    flex-direction: column;
-}
+        /* Painel do formulário*/
+        .carta-info-panel {
+            flex: 2 1 250px;
+            /* ocupa mais espaço, base de 380px */
+            min-width: 100px;
+            max-width: 500px;
+            margin: 0;
+            background: var(--bg-card);
+            /* #1c1c1c */
+            border: 1.5px solid var(--color-crimson-dark);
+            border-radius: 16px;
+            padding: 1.5rem 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+        }
 
-/* Títulos e labels – brancos */
-.carta-info-panel .form-title {
-    color: #ffffff;
-    text-align: center;
-    margin-bottom: 1.25rem;
-    font-size: 1.3rem;
-    font-weight: 700;
-}
+        /* Títulos e labels*/
+        .carta-info-panel .form-title {
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 1.25rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
 
-.carta-info-panel .form-group label {
-    color: #cccccc;
-    font-weight: 600;
-    font-size: 0.75rem;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-}
+        .carta-info-panel .form-group label {
+            color: #cccccc;
+            font-weight: 600;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
 
-/* Valores estáticos – fundo levemente mais claro, texto branco */
-.carta-info-panel .form-static {
-    background: #2a2a2a;
-    border: 1px solid #3a3a3a;
-    color: #ffffff;
-    min-height: 38px;
-    padding: 6px 12px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-}
+        /* Valores estáticos*/
+        .carta-info-panel .form-static {
+            background: #2a2a2a;
+            border: 1px solid #3a3a3a;
+            color: #ffffff;
+            min-height: 38px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+        }
 
-/* Grade de campos em 2 colunas */
-.carta-info-panel .form-fields-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem 1.5rem;
-    margin-bottom: 1.5rem;
-}
+        /* Grade de campos em 2 colunas */
+        .carta-info-panel .form-fields-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
 
-.carta-info-panel .form-fields-grid .form-group {
-    margin-bottom: 0;
-}
+        .carta-info-panel .form-fields-grid .form-group {
+            margin-bottom: 0;
+        }
 
-/* Ações (contador + botão) */
-.carta-info-panel .card-actions {
-    margin: 0 0 0.5rem 0;
-    gap: 1rem;
-    display: flex;
-    align-items: center;
-}
+        /* Ações (contador + botão) */
+        .carta-info-panel .card-actions {
+            margin: 0 0 0.5rem 0;
+            gap: 1rem;
+            display: flex;
+            align-items: center;
+        }
 
-.carta-info-panel .form-footer-link {
-    margin-top: 0.5rem;
-    color: #aaa;
-    text-align: center;
-}
+        .carta-info-panel .form-footer-link {
+            margin-top: 0.5rem;
+            color: #aaa;
+            text-align: center;
+        }
 
-.carta-info-panel .form-footer-link a {
-    color: var(--color-crimson-light);
-    text-decoration: none;
-    font-weight: 600;
-}
+        .carta-info-panel .form-footer-link a {
+            color: var(--color-crimson-light);
+            text-decoration: none;
+            font-weight: 600;
+        }
 
-.carta-info-panel .form-footer-link a:hover {
-    text-decoration: underline;
-}
+        .carta-info-panel .form-footer-link a:hover {
+            text-decoration: underline;
+        }
 
-/* Divisor */
-.carta-info-panel .form-divider {
-    background: #3a3a3a;
-    height: 1px;
-    margin: 1rem 0;
-}
+        /* Divisor */
+        .carta-info-panel .form-divider {
+            background: #3a3a3a;
+            height: 1px;
+            margin: 1rem 0;
+        }
 
-/* ===== Responsividade ===== */
-@media (max-width: 780px) {
-    .carta-layout {
-        flex-direction: column;   /* empilha verticalmente */
-        align-items: center;
-        gap: 1.5rem;
-    }
+        /* ===== Responsividade ===== */
+        @media (max-width: 780px) {
+            .carta-layout {
+                flex-direction: column;
+                /* empilha verticalmente */
+                align-items: center;
+                gap: 1.5rem;
+            }
 
-    .carta-imagem-box {
-        flex: 0 0 auto;
-        width: 200px;
-        height: 200px;           /* mantém quadrado */
-        max-width: 60%;
-    }
+            .carta-imagem-box {
+                flex: 0 0 auto;
+                width: 200px;
+                height: 200px;
+                /* mantém quadrado */
+                max-width: 60%;
+            }
 
-    .carta-info-panel {
-        flex: 0 0 auto;
-        width: 100%;
-        max-width: 500px;
-        padding: 1.25rem;
-    }
+            .carta-info-panel {
+                flex: 0 0 auto;
+                width: 100%;
+                max-width: 500px;
+                padding: 1.25rem;
+            }
 
-    .carta-info-panel .form-fields-grid {
-        grid-template-columns: 1fr;  /* vira uma coluna */
-        gap: 0.5rem;
-    }
-}
+            .carta-info-panel .form-fields-grid {
+                grid-template-columns: 1fr;
+                /* vira uma coluna */
+                gap: 0.5rem;
+            }
+        }
 
-@media (max-width: 480px) {
-    .carta-imagem-box {
-        width: 140px;
-        height: 140px;
-        max-width: 80%;
-    }
+        @media (max-width: 480px) {
+            .carta-imagem-box {
+                width: 140px;
+                height: 140px;
+                max-width: 80%;
+            }
 
-    .carta-info-panel {
-        padding: 1rem;
-    }
-}
+            .carta-info-panel {
+                padding: 1rem;
+            }
+        }
     </style>
 </head>
 
@@ -222,8 +229,8 @@ $id = $_SESSION['view_id'];
 
                 <!-- Imagem da carta (esquerda) -->
                 <div class="carta-imagem-box">
-                    <img src="<?php echo htmlspecialchars($imagem ?? 'img/SemImagem.png') ?>"
-                         alt="<?php echo htmlspecialchars($nome ?? 'Sem nome') ?>">
+                    <img src="img/<?php echo htmlspecialchars($imagem ?? 'SemImagem.png') ?>"
+                        alt="<?php echo htmlspecialchars($nome ?? 'Sem nome') ?>">
                 </div>
 
                 <!-- Informações da carta (direita) -->
