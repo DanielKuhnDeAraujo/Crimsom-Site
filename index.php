@@ -7,8 +7,9 @@ session_start(); ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crimsom Beast</title>
-    <link rel="stylesheet" href="css/style.css">
+    
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
         body {
             background-color: var(--bg-white);
@@ -117,12 +118,12 @@ session_start(); ?>
                         <span class="card-price">R$: <?= htmlspecialchars($row['PRECO']) ?></span>
                     </div>
                     <div class="card-actions">
-                        <div class="card-counter">
+                        <!-- <div class="card-counter">
                             <button class="counter-btn" onclick="changeQty(this, -1)">−</button>
                             <span class="counter-qty">0</span>
                             <button class="counter-btn" onclick="changeQty(this, 1)">+</button>
                         </div>
-                        <button class="btn-lista">+Lista</button>
+                        <button class="btn-lista">+Lista</button> -->
                     </div>
                 </div>
                 <?php

@@ -10,6 +10,9 @@ if(isset($_SESSION['nome'])){
                 <img src="img/logo.png" alt="Logo" width="60" height="50" class="d-inline-block align-itens-end">
                 <b>Crimsom Beasts</b>
             </a>
+            <a href="pacotinho.php" class="navbar-brand " style= "font-size: 1.2rem;font-weight: bold;">
+                <h7>Pacotinho</h7>
+            </a>
             <a class="navbar-brand me-5" href="<?php 
                         if ($logado){
                             echo "verusuario.php";

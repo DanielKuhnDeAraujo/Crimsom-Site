@@ -262,8 +262,8 @@ $id = $_SESSION['view_id'];
                             <div class="form-static">R$ <?php echo number_format($preco ?? 0, 2, ",", ".") ?></div>
                         </div>
                     </div>
-
-                    <div class="form-divider"></div>
+                    
+                    <!-- <div class="form-divider"></div>
 
                     <div class="card-actions">
                         <div class="card-counter">
@@ -272,11 +272,18 @@ $id = $_SESSION['view_id'];
                             <button class="counter-btn" onclick="changeQty(this, 1)">+</button>
                         </div>
                         <button class="btn-lista">+Lista</button>
-                    </div>
+                    </div> -->
 
-                    <div class="form-footer-link">
+                    <div class="form-footer-link mb-3">
                         <a href="index.php">← Voltar para a lista</a>
                     </div>
+                    <?php if (isset($_SESSION['nivel']) && $_SESSION['nivel'] === 'adm'): ?>
+                        <div class="form-group d-flex justify-content-center align-items-center">
+                            <a href="editar.php" class="btn-toolbar">
+                                Editar
+                            </a>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
             </div>

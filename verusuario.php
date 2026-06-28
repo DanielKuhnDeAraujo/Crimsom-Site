@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <?php
-
-session_start(); ?>
-
+session_start(); 
+if (isset($_SESSION['nome'])) {
+        $nomelog = $_SESSION['nome'];
+    } else {
+        header("Location:login.php");
+        exit;
+    }?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -202,13 +206,9 @@ session_start(); ?>
     <?php include("navbar.php") ?>
 
     <?php
-    if (isset($_SESSION['nome'])) {
-        $nomelog = $_SESSION['nome'];
-    } else {
-        header("Location:login.php");
-    }
+    
     try {
-        $sql = "SELECT * FROM usuario WHERE nome = :nome";
+        $sql = " SELECT * FROM usuario WHERE nome = :nome ";
         $query = $conn->prepare($sql);
         $query->execute(['nome' => $nomelog]);
 
@@ -218,7 +218,7 @@ session_start(); ?>
             $SENHA = $dados["SENHA"];
             $NIVEL = $dados["NIVEL"];
         } else {
-            throw new Exception("O seu perfil não foi encontrado");
+            throw new Exception("O perfil de nome ". $nomelog. " não foi encontrado");
         }
 
     } catch (Exception $e) {

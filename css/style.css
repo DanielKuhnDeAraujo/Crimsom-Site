@@ -540,3 +540,7 @@ footer p {
     background: var(--color-crimson-light);
     color: #fff;
 }
+
+.nav-link {
+    color: white ;
+}

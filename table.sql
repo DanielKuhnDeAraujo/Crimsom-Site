@@ -22,8 +22,21 @@ CREATE TABLE IF NOT EXISTS usuario (
 );
 
 INSERT INTO cartas(NOME,IMAGEM,SANGUE,RARIDADE,LENDARIO,COLECAO,ID2,PRECO)values
-("teste","logo.png","1","elite",'n',"TST",1,100),
 ('Sapo Gigante', 'logo.png', '3', 'ordinario', 'n', 'Base', 1, 12.90),
 ('Sapo Gigante+', 'logo.png', '3', 'excepcional', 'n', 'Base', 2, 89.90),
 ('Sapo Gigante+++', 'logo.png', '3', 'elite', 's', 'Base', 3, 199.90),
 ('Sapo Gigante++++', 'logo.png', '3', 'unico', 's', 'Base', 4, 349.90);
+('Sapo GiganteS+','logo.png', '3', 'desespero', 's', 'Base', 4, 349.90);
+
+
+INSERT INTO cartas(NOME,IMAGEM,SANGUE,RARIDADE,LENDARIO,COLECAO,ID2,PRECO)values
+('Aranha Gigante', 'logo.png', '3', 'ordinario', 'n', 'Base', 1, 12.90),
+('Aranha Gigante+', 'logo.png', '3', 'excepcional', 'n', 'Base', 2, 89.90),
+('Aranha Gigante+++', 'logo.png', '3', 'elite', 's', 'Base', 3, 199.90),
+('Aranha Gigante++++', 'logo.png', '3', 'unico', 's', 'Base', 4, 349.90);
+
+INSERT INTO cartas(NOME,IMAGEM,SANGUE,RARIDADE,LENDARIO,COLECAO,ID2,PRECO)values
+('Lobo Gigante', 'logo.png', '3', 'ordinario', 'n', 'Base', 1, 12.90),
+('Lobo Gigante+', 'logo.png', '3', 'excepcional', 'n', 'Base', 2, 89.90),
+('Lobo Gigante+++', 'logo.png', '3', 'elite', 's', 'Base', 3, 199.90),
+('Lobo Gigante++++', 'logo.png', '3', 'unico', 's', 'Base', 4, 349.90);
