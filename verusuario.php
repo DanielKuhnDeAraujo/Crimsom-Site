@@ -335,10 +335,33 @@ session_start(); ?>
                 <!-- Informações da carta (direita) -->
                 <div class="carta-info-panel form-wrap">
                     <h5 class="form-title"> <?= htmlspecialchars($NOME) ?>
-                    <span class="badge bg-secondary"><?= htmlspecialchars($NIVEL) ?></span>
+                        <span class="badge bg-secondary"><?= htmlspecialchars($NIVEL) ?></span>
                     </h5>
 
                     <div class="perfil-campos" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+                        <table class="mb-3 mt-3">
+                            <tr class="">
+                                <th class="text-white">Nome:</th>
+                                <td class="text-white">
+                                    <?= htmlspecialchars($NOME) ?>
+                                </td>
+                            </tr>
+                            <tr >
+                                <th class="text-white">Email:</th>
+                                <td class="text-white">
+                                    <?= htmlspecialchars($EMAIL) ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-white">Nível:</th>
+                                <td class="text-white">
+                                    <?= htmlspecialchars($NIVEL) ?>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!--<div class="perfil-campos" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
                         <div class="form-group" style="flex: 1; min-width: 140px;">
                             <label>Nome</label>
                             <div class="form-static"><?= htmlspecialchars($NOME ?? '') ?></div>
@@ -351,7 +374,7 @@ session_start(); ?>
                             <label>Nível de acesso</label>
                             <div class="form-static"><?= htmlspecialchars($NIVEL ?? 'user') ?></div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="form-divider"></div>
 
