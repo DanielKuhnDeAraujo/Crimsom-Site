@@ -210,7 +210,8 @@ if (isset($_SESSION['nome'])) {
     try {
         $sql = " SELECT * FROM usuario WHERE nome = :nome ";
         $query = $conn->prepare($sql);
-        $query->execute(['nome' => $nomelog]);
+        $query->bindValue(':nome', $nomelog, PDO::PARAM_STR);
+        $query->execute();
 
         if ($dados = $query->fetch(PDO::FETCH_ASSOC)) {
             $NOME = $dados["NOME"];
