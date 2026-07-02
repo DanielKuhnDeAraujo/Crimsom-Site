@@ -1,12 +1,13 @@
 <?php
 session_start();
-
+include "conexao.php";
 // Processamento do formulário
 if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
     try {
         if(!empty($_POST["id_carta"])){
-            include "conexao.php";
-
+            $id =   (int) ($_POST['id_carta']);
+            if(!empty($_POST['update'])){
+            
             // Captura e sanitização
             $nome = trim($_POST['nome'] ?? '');
             $id2 = (int) ($_POST['id2'] ?? 0);
@@ -15,6 +16,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
             $raridade = $_POST['raridade'] ?? '';
             $lendario = isset($_POST['lendario']) && $_POST['lendario'] === 's' ? 's' : 'n';
             $colecao = trim($_POST['colecao'] ?? '');
+            if (empty($id2)){
+                $id2 = $id;
+            }
 
             // Validações
             if (empty($nome) || empty($raridade) || empty($colecao)) {
@@ -42,12 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
             }
 
             // Inserção no banco (com prepared statement)
-            $sql = "INSERT INTO cartas (NOME, IMAGEM, SANGUE, RARIDADE, LENDARIO, COLECAO, ID2, PRECO)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "update cartas set NOME = ?, IMAGEM=?, SANGUE=?, RARIDADE=?, LENDARIO=?, COLECAO=?, ID2=?, PRECO=? where ID_CARTA=?";
             $stmt = $conn->prepare($sql);
             if (!$stmt->execute([$nome, $arquivo, $sangue, $raridade, $lendario, $colecao, $id2, $preco])) {
                 $errorInfo = $stmt->errorInfo();
-                throw new Exception("Erro ao inserir: " . ($errorInfo[2] ?? 'Falha na execução'));
+                throw new Exception("Erro ao editar: " . ($errorInfo[2] ?? 'Falha na execução'));
             }
             $stmt = null;
 
@@ -63,6 +66,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
                 </div>
             </div>';
 
+    }else{
+        $stmt = $conn->prepare('SELECT * FROM cartas WHERE id_carta LIKE :id ');
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $nome = $row['NOME'];
+        $id2 = $row['ID2'];
+        // $sangue = trim($_POST['sangue'] ?? '');
+        // $preco = (float) str_replace(',', '.', $_POST['preco'] ?? 0);
+        // $raridade = $_POST['raridade'] ?? '';
+        // $lendario = isset($_POST['lendario']) && $_POST['lendario'] === 's' ? 's' : 'n';
+        // $colecao = trim($_POST['colecao'] ?? '');
+        if (empty($id2)){
+            $id2 = $id;
+        }
+    }
     }else{
         throw new Exception("Id da carta não foi encontrado.");
     }
@@ -446,7 +465,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
                 <div class="card-preview">
 
                     <div class="card-preview-header">
-                        <span class="card-preview-name" id="prevNome">Nome do card</span>
+                        <span class="card-preview-name" id="prevNome"><?php echo $nome;?></span>
                         <span class="card-preview-badge" id="prevBadge">—</span>
                     </div>
 
@@ -475,7 +494,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
             <!-- DIREITA: formulário -->
             <div class="form-side">
                 <div class="form-wrap">
-                    <p class="form-title mb-5">Novo carta</p>
+                    <p class="form-title mb-5">Editar carta</p>
 
                     <form action="cartas_add.php" method="POST" enctype="multipart/form-data">
 
@@ -484,11 +503,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="nome">Nome</label>
-                                <input type="text" id="nome" name="nome" placeholder="Nome da carta" required>
+                                <input type="text" id="nome" name="nome" value="<?php echo $nome;?>" placeholder="Nome da carta" required>
                             </div>
                             <div class="form-group">
                                 <label for="id2">ID Secundário</label>
-                                <input type="number" id="id2" name="id2" min="0" placeholder="ex: 0042">
+                                <input type="number" id="id2" name="id2" value="<?php echo $id2;?>" min="0" placeholder="ex: 0042">
                             </div>
                         </div>
 
@@ -537,7 +556,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
 
                         <div class="form-divider"></div>
 
-                        <button type="submit" class="form-btn">+ Cadastrar Card</button>
+                        <button type="submit" class="form-btn">Salvar mudanças</button>
 
                         <div class="form-footer-link">
                             <a href="index.php">← Voltar para a lista</a>

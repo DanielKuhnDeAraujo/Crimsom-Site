@@ -2,7 +2,7 @@
 $logado = false;
 if(isset($_SESSION['nome'])){
     $logado= true;
-    $nome = $_SESSION['nome'];
+    $nom = $_SESSION['nome'];
 } ?>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
         <div class="container-fluid">
@@ -25,7 +25,7 @@ if(isset($_SESSION['nome'])){
             font-weight: bold;"> 
                     <?php 
                         if ($logado){
-                            echo $nome;
+                            echo $nom;
                         }else {
                             echo "Login";
                         }
