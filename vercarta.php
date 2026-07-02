@@ -280,7 +280,7 @@ $id = $_SESSION['view_id'];
                     <?php if (isset($_SESSION['nivel']) && $_SESSION['nivel'] === 'adm'): ?>
                         <div class="form-group d-flex justify-content-center align-items-center">
                             <form action="editar.php" method="POST" style="display: inline;">
-                                <input type="hidden" name="id_carta" value="<?php $id   ?>">
+                                <input type="hidden" name="id_carta" value="<?php echo "" . $id;    ?>">
                                 <button type="submit" class="btn-toolbar">
                                     Editar
                                 </button>
