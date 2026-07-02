@@ -279,9 +279,12 @@ $id = $_SESSION['view_id'];
                     </div>
                     <?php if (isset($_SESSION['nivel']) && $_SESSION['nivel'] === 'adm'): ?>
                         <div class="form-group d-flex justify-content-center align-items-center">
-                            <a href="editar.php" class="btn-toolbar">
-                                Editar
-                            </a>
+                            <form action="editar.php" method="POST" style="display: inline;">
+                                <input type="hidden" name="id_carta" value="<?php $id   ?>">
+                                <button type="submit" class="btn-toolbar">
+                                    Editar
+                                </button>
+                            </form>
                         </div>
                     <?php endif; ?>
                 </div>
