@@ -25,7 +25,7 @@ INSERT INTO cartas(NOME,IMAGEM,SANGUE,RARIDADE,LENDARIO,COLECAO,ID2,PRECO)values
 ('Sapo Gigante', 'logo.png', '3', 'ordinario', 'n', 'Base', 1, 12.90),
 ('Sapo Gigante+', 'logo.png', '3', 'excepcional', 'n', 'Base', 2, 89.90),
 ('Sapo Gigante+++', 'logo.png', '3', 'elite', 's', 'Base', 3, 199.90),
-('Sapo Gigante++++', 'logo.png', '3', 'unico', 's', 'Base', 4, 349.90);
+('Sapo Gigante++++', 'logo.png', '3', 'unico', 's', 'Base', 4, 349.90),
 ('Sapo GiganteS+','logo.png', '3', 'desespero', 's', 'Base', 4, 349.90);
 
 

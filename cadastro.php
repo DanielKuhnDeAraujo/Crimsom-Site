@@ -10,6 +10,7 @@ if (isset($_SESSION['nome'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro — Crimsom Beast</title>
+    <link rel="icon" type="image/x-icon" href="img/logo.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>

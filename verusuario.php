@@ -12,6 +12,7 @@ if (isset($_SESSION['nome'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crimsom Beast</title>
+    <link rel="icon" type="image/x-icon" href="img/logo.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
@@ -342,40 +343,25 @@ if (isset($_SESSION['nome'])) {
                     <div class="perfil-campos" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
                         <table class="mb-3 mt-3">
                             <tr class="">
-                                <th class="text-white">Nome:</th>
+                                <th class="text-white p-md-2">Nome:</th>
                                 <td class="text-white">
                                     <?= htmlspecialchars($NOME) ?>
                                 </td>
                             </tr>
                             <tr >
-                                <th class="text-white">Email:</th>
+                                <th class="text-white p-md-2">Email:</th>
                                 <td class="text-white">
                                     <?= htmlspecialchars($EMAIL) ?>
                                 </td>
                             </tr>
                             <tr>
-                                <th class="text-white">Nível:</th>
+                                <th class="text-white p-md-2">Nível:</th>
                                 <td class="text-white">
                                     <?= htmlspecialchars($NIVEL) ?>
                                 </td>
                             </tr>
                         </table>
                     </div>
-
-                    <!--<div class="perfil-campos" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
-                        <div class="form-group" style="flex: 1; min-width: 140px;">
-                            <label>Nome</label>
-                            <div class="form-static"><?= htmlspecialchars($NOME ?? '') ?></div>
-                        </div>
-                        <div class="form-group" style="flex: 1; min-width: 140px;">
-                            <label>Email</label>
-                            <div class="form-static"><?= htmlspecialchars($EMAIL ?? '') ?></div>
-                        </div>
-                        <div class="form-group" style="flex: 1; min-width: 140px;">
-                            <label>Nível de acesso</label>
-                            <div class="form-static"><?= htmlspecialchars($NIVEL ?? 'user') ?></div>
-                        </div>
-                    </div> -->
 
                     <div class="form-divider"></div>
 
@@ -388,23 +374,6 @@ if (isset($_SESSION['nome'])) {
                     </div>
                 </div>
             <?php endif; ?>
-            <!-- <h5 class="card-title"> <?= htmlspecialchars($NOME) ?>
-                <span class="badge bg-secondary"><?= htmlspecialchars($NIVEL) ?></span>
-            </h5>
-            <table class="mb-3 mt-2">
-                <tr>
-                    <th>Nome:</th>
-                    <td><?= htmlspecialchars($NOME) ?></td>
-                </tr>
-                <tr>
-                    <th>Email:</th>
-                    <td><?= htmlspecialchars($EMAIL) ?></td>
-                </tr>
-                <tr>
-                    <th>Nível:</th>
-                    <td><?= htmlspecialchars($NIVEL) ?></td>
-                </tr>
-            </table>*/ -->
         </div>
     </div>
     </div>
