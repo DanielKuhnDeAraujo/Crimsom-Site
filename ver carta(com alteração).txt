@@ -1,0 +1,2 @@
+<button class="btn btn-danger"type="submit">Excluir</button>
+adiciona isso no ver carta, na linha 281
