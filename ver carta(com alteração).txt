@@ -1,2 +1,5 @@
-<button class="btn btn-danger"type="submit">Excluir</button>
-adiciona isso no ver carta, na linha 281
+<form action="excluir.php" method="post">
+                            <input type="hidden" name="id" value="<?php echo $id?>">
+                            <button class="btn btn-danger"type="submit">Excluir</button>
+                        </form>
+adiciona isso no ver carta, na linha 280
