@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $nome = $row['NOME'];
         $id2 = $row['ID2'];
-        // $sangue = trim($_POST['sangue'] ?? '');
+        $sangue = trim($_POST['sangue'] ?? '');
         // $preco = (float) str_replace(',', '.', $_POST['preco'] ?? 0);
         // $raridade = $_POST['raridade'] ?? '';
         // $lendario = isset($_POST['lendario']) && $_POST['lendario'] === 's' ? 's' : 'n';
@@ -515,7 +515,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="sangue">Sangue</label>
-                                <input type="number" id="sangue" name="sangue" min="0" placeholder="0">
+                                <input type="number" id="sangue" name="sangue"  value="<?php echo $sangue;?>"min="0" placeholder="0">
                             </div>
                             <div class="form-group">
                                 <label for="preco">Preço</label>
