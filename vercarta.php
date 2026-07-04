@@ -279,8 +279,12 @@ $id = $_SESSION['view_id'];
                         <a href="index.php">← Voltar para a lista</a>
                     </div>
                     <?php if (isset($_SESSION['nivel']) && $_SESSION['nivel'] === 'adm'): ?>
-                        <div class="form-group d-flex justify-content-center align-items-center">
-                            <form action="editar.php" method="POST" style="display: inline;">
+                        <div class="form-group d-flex justify-content-center flex-row align-items-center">
+                            <form action="excluir.php" method="post">
+                            <input type="hidden" name="id" value="<?php echo $id?>">
+                            <button class="btn-toolbar"type="submit">Excluir</button>
+                        </form>
+                            <form action="editar.php" method="POST" >
                                 <input type="hidden" name="id_carta" value="<?php echo "" . $id;    ?>">
                                 <button type="submit" class="btn-toolbar">
                                     Editar
