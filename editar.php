@@ -27,28 +27,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
             if ($preco < 0) {
                 throw new Exception("Preço não pode ser negativo.");
             }
+            $imagem = $_POST['imagem'];
+            $arquivo = $imagem; // mantém a imagem atual
 
-            // Upload da imagem
-            if (!isset($_FILES['imagem']) || $_FILES['imagem']['error'] !== UPLOAD_ERR_OK) {
-                throw new Exception("Selecione uma imagem válida.");
-            }
+            if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
+                unlink("img/" . $arquivo);
 
-            $extensoes = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
-            $ext = strtolower(pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION));
-            if (!in_array($ext, $extensoes)) {
-                throw new Exception("Extensão não permitida. Use JPG, PNG, WEBP ou GIF.");
-            }
+                $extensoes = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                $ext = strtolower(pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION));
 
-            $arquivo = uniqid('card_', true) . '.' . $ext;
-            $destino = "img/" . $arquivo;
-            if (!move_uploaded_file($_FILES['imagem']['tmp_name'], $destino)) {
-                throw new Exception("Erro ao salvar a imagem.");
+                if (!in_array($ext, $extensoes)) {
+                    throw new Exception("Extensão não permitida.");
+                }
+
+                $arquivo = uniqid('card_', true) . '.' . $ext;
+                $destino = "img/" . $arquivo;
+
+                if (!move_uploaded_file($_FILES['imagem']['tmp_name'], $destino)) {
+                    throw new Exception("Erro ao salvar a imagem.");
+                }
             }
 
             // Inserção no banco (com prepared statement)
             $sql = "update cartas set NOME = ?, IMAGEM=?, SANGUE=?, RARIDADE=?, LENDARIO=?, COLECAO=?, ID2=?, PRECO=? where ID_CARTA=?";
             $stmt = $conn->prepare($sql);
-            if (!$stmt->execute([$nome, $arquivo, $sangue, $raridade, $lendario, $colecao, $id2, $preco])) {
+            if (!$stmt->execute([$nome, $arquivo, $sangue, $raridade, $lendario, $colecao, $id2, $preco,$id])) {
                 $errorInfo = $stmt->errorInfo();
                 throw new Exception("Erro ao editar: " . ($errorInfo[2] ?? 'Falha na execução'));
             }
@@ -61,27 +64,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
                     <polyline points="22 4 12 14.01 9 11.01"/>
                 </svg>
                 <div>
-                    <strong>Cadastrado com sucesso!</strong><br>
+                    <strong>Editado com sucesso!</strong><br>
                     <a href="index.php" class="btn-teal" style="margin-top:.6rem;">Voltar à listagem</a>
                 </div>
             </div>';
 
-    }else{
+    }
         $stmt = $conn->prepare('SELECT * FROM cartas WHERE id_carta LIKE :id ');
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $nome = $row['NOME'];
         $id2 = $row['ID2'];
-        $sangue = trim($_POST['sangue'] ?? '');
-        // $preco = (float) str_replace(',', '.', $_POST['preco'] ?? 0);
-        // $raridade = $_POST['raridade'] ?? '';
-        // $lendario = isset($_POST['lendario']) && $_POST['lendario'] === 's' ? 's' : 'n';
-        // $colecao = trim($_POST['colecao'] ?? '');
+        $sangue = $row['SANGUE'];
+        $preco = $row['PRECO'];
+        $raridade = $row['RARIDADE'];
+        $lendario = $row['LENDARIO'];
+        $colecao = $row['COLECAO'];
         if (empty($id2)){
             $id2 = $id;
         }
-    }
+        $imagem = $row['IMAGEM'];
     }else{
         throw new Exception("Id da carta não foi encontrado.");
     }
@@ -465,13 +468,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
                 <p class="preview-label">Preview do Card</p>
                 <div class="card-preview">
 
-                    <div class="card-preview-header">
+                    <div class="card-preview-header">   
                         <span class="card-preview-name" id="prevNome"><?php echo $nome;?></span>
-                        <span class="card-preview-badge" id="prevBadge">—</span>
+                        <span class="card-preview-badge" id="prevBadge"><?php echo $raridade;?></span>
                     </div>
 
-                    <div class="card-preview-art" id="previewArt" onclick="document.getElementById('imagem').click()">
-                        <img id="prevImg" src="" alt="Arte do card">
+                    <div class="card-preview-art <?php echo !empty($imagem) ? 'has-image' : ''; ?>" id="previewArt" onclick="document.getElementById('imagem').click()">
+                        <img
+                            id="prevImg"
+                            src="<?php echo !empty($imagem) ? 'img/' . htmlspecialchars($imagem) : ''; ?>"
+                            alt="Arte do card"
+                            class="<?php echo !empty($imagem) ? 'visible' : ''; ?>"
+                        >
+
                         <div class="upload-hint">
                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -485,8 +494,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
                     </div>
 
                     <div class="card-preview-footer">
-                        <span class="card-preview-collection" id="prevColecao">—</span>
-                        <span class="card-preview-price" id="prevPreco">—</span>
+                        <span class="card-preview-collection" id="prevColecao"><?php echo $colecao;?></span>
+                        <span class="card-preview-price" id="prevPreco"><?php echo $preco;?></span>
                     </div>
 
                 </div>
@@ -497,7 +506,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
                 <div class="form-wrap">
                     <p class="form-title mb-5">Editar carta</p>
 
-                    <form action="cartas_add.php" method="POST" enctype="multipart/form-data">
+                    <form action="editar.php" method="POST" enctype="multipart/form-data">
 
                         <input type="file" id="imagem" name="imagem" accept="image/*">
 
@@ -521,7 +530,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
                                 <label for="preco">Preço</label>
                                 <div class="input-prefix-wrap">
                                     <span class="input-prefix">R$</span>
-                                    <input type="number" id="preco" name="preco" min="0" step="0.01" placeholder="0,00">
+                                    <input type="number" id="preco" name="preco" value="<?php echo $preco;?>" min="0" step="0.01" placeholder="0,00">
                                 </div>
                             </div>
                         </div>
@@ -530,21 +539,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
                             <div class="form-group">
                                 <label for="raridade">Raridade</label>
                                 <select id="raridade" name="raridade" required>
-                                    <option value="" disabled selected>Selecionar...</option>
-                                    <option value="ordinario">Ordinário</option>
-                                    <option value="excepcional">Excepcional</option>
-                                    <option value="elite">Elite</option>
-                                    <option value="unico">Único</option>
+                                    <option value="" disabled >Selecionar...</option>
+                                    <option value="ordinario" <?php if($raridade=="ordinario"){echo "selected";}?>>Ordinário</option>
+                                    <option value="excepcional" <?php if($raridade=="excepcional"){echo "selected";}?>>Excepcional</option>
+                                    <option value="elite" <?php if($raridade=="elite"){echo "selected";}?>>Elite</option>
+                                    <option value="unico" <?php if($raridade=="unico"){echo "selected";}?>>Único</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Lendário</label>
                                 <div style="display:flex; gap:1rem; padding:10px 0;">
                                     <label style="color:var(--card-text); font-size:14px;">
-                                        <input type="radio" name="lendario" value="s"> Sim
+                                        <input type="radio" name="lendario" value="s" <?php if($lendario=="s"){echo "checked";}?>> Sim
                                     </label>
                                     <label style="color:var(--card-text); font-size:14px;">
-                                        <input type="radio" name="lendario" value="n" checked> Não
+                                        <input type="radio" name="lendario" value="n" <?php if($lendario=="n"){echo "checked";}?>> Não
                                     </label>
                                 </div>
                             </div>
@@ -552,11 +561,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
 
                         <div class="form-group">
                             <label for="colecao">Coleção</label>
-                            <input type="text" id="colecao" name="colecao" placeholder="Nome da coleção" required>
+                            <input type="text" id="colecao" name="colecao" value="<?php echo $colecao;?>" placeholder="Nome da coleção" required>
                         </div>
 
                         <div class="form-divider"></div>
 
+                        <input type="hidden" name="id_carta" value="<?php echo $id?>">
+                        <input type="hidden" name="imagem" value="<?php echo $imagem?>">     
+                        <input type="hidden" name="update" value="true">                        
                         <button type="submit" class="form-btn">Salvar mudanças</button>
 
                         <div class="form-footer-link">
