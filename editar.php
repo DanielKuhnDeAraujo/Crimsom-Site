@@ -544,6 +544,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
                                     <option value="excepcional" <?php if($raridade=="excepcional"){echo "selected";}?>>Excepcional</option>
                                     <option value="elite" <?php if($raridade=="elite"){echo "selected";}?>>Elite</option>
                                     <option value="unico" <?php if($raridade=="unico"){echo "selected";}?>>Único</option>
+                                    <option value="sacrificio" <?php if($raridade=="sacrificio"){echo "selected";}?>>Sacrifício</option>
                                 </select>
                             </div>
                             <div class="form-group">

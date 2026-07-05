@@ -512,6 +512,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <option value="excepcional">Excepcional</option>
                                     <option value="elite">Elite</option>
                                     <option value="unico">Único</option>
+                                    <option value="sacrificio">Sacrifício</option>
                                 </select>
                             </div>
                             <div class="form-group">
