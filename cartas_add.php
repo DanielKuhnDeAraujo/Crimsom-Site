@@ -513,6 +513,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <option value="elite">Elite</option>
                                     <option value="unico">Único</option>
                                     <option value="sacrificio">Sacrifício</option>
+                                    <option value="desespero">Desespero</option>
                                 </select>
                             </div>
                             <div class="form-group">
