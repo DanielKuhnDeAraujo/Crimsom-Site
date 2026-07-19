@@ -194,7 +194,7 @@ session_start();
     // Desespero     2% (99-100)
 
     // Ajuste esta pasta para onde as imagens das cartas (coluna IMAGEM) estão salvas
-    $pastaImagens = "img/cartas/";
+    $pastaImagens = "img/";
 
     $cartasSelecionadas = [];
     $jaforam = array_fill(0, 9, '');
@@ -207,11 +207,17 @@ session_start();
         if ($rand <= 93)  $raridade = "elite";
         if ($rand <= 80)  $raridade = "excepcional";
         if ($rand <= 50)  $raridade = "ordinario";
-
+        
         $stmt = $conn->prepare('SELECT * FROM cartas WHERE raridade LIKE :raridade');
         $stmt->bindValue(':raridade', '%' . $raridade . '%', PDO::PARAM_STR);
         $stmt->execute();
         $cartas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($raridade == "ordinario") {
+            $stmt = $conn->prepare('SELECT * FROM cartas WHERE raridade LIKE "ordinario" or raridade like "sacrificio" ');
+            $stmt->execute();
+            $cartas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
 
         if (empty($cartas)) {
             // nenhuma carta cadastrada nessa raridade ainda, sorteia de novo
@@ -249,9 +255,9 @@ session_start();
                         <div class="pacote-card raridade-<?= $raridade ?>" style="--delay: <?= $delay ?>s;">
                             <span class="pacote-card-raridade-tag"><?= htmlspecialchars(ucfirst($raridade)) ?></span>
                             <div class="pacote-card-imagem">
-                                <img src="<?= htmlspecialchars($pastaImagens . $carta['IMAGEM']) ?>"
+                                <img src="img/<?php echo $carta['IMAGEM'] ;?>"
                                      alt="<?= htmlspecialchars($carta['NOME']) ?>"
-                                     onerror="this.onerror=null;this.src='img/logo.png';">
+                                     >
                                 <span class="pacote-card-brilho"></span>
                             </div>
                             <div class="pacote-card-rodape">
