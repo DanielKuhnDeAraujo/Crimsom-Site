@@ -32,7 +32,7 @@ if (isset($_SESSION['nome'])) {
         </button>
 
         <!-- Conteúdo -->
-        <div class="collapse navbar-collapse bg-dark p-3 p-md-0" id="navbarMenu">
+        <div class="collapse navbar-collapse bg-dark p-3 p-md-0 me-3" id="navbarMenu">
 
             <!-- Empurra os links para a direita -->
             <div class="ms-auto d-lg-flex align-items-center">

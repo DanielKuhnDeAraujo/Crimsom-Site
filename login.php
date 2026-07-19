@@ -11,8 +11,9 @@ if (isset($_SESSION['nome'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login — Crimsom Beast</title>
     <link rel="icon" type="image/x-icon" href="img/logo.ico">
-    <link rel="stylesheet" href="css/style.css">
+    
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
         body {
             background-color: var(--bg-white);
@@ -35,7 +36,7 @@ if (isset($_SESSION['nome'])){
 
 <body>
     <?php
-    include("navbar.php")?>
+    include("navbar.php");?>
 
     <div class="page-wrap">
         <?php

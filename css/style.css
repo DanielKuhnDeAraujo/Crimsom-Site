@@ -123,6 +123,14 @@ footer p {
     gap: 20px;
     align-items: stretch;
 }
+@media (max-width: 1000px) {
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    align-items: stretch;
+}
+}
 
 .card {
     background: var(--bg-card);
