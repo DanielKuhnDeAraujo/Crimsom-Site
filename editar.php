@@ -640,6 +640,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
             el.addEventListener('change', updatePreview);
         });
     </script>
+    <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

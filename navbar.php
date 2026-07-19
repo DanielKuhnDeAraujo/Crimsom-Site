@@ -4,33 +4,56 @@ if(isset($_SESSION['nome'])){
     $logado= true;
     $nom = $_SESSION['nome'];
 } ?>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <a class="ms-2 navbar-brand" href="index.php">
-                <img src="img/logo.png" alt="Logo" width="60" height="50" class="d-inline-block align-itens-end">
-                <b>Crimsom Beasts</b>
-            </a>
-            <a href="pacotinho.php" class="navbar-brand " style= "font-size: 1.2rem;font-weight: bold;">
-                <h7>Pacotinho</h7>
-            </a>
-            <a class="navbar-brand me-5" href="<?php 
-                        if ($logado){
-                            echo "verusuario.php";
-                        }else {
-                            echo "login.php";
-                        }
-                    ?>">
-                <img src="img/login.png " alt="Logo" width="45" height="45" class="d-inline-block align-itens-end ">
-                <h7 style= "font-size: 1.2rem;
-            font-weight: bold;"> 
-                    <?php 
-                        if ($logado){
-                            echo $nom;
-                        }else {
-                            echo "Login";
-                        }
-                    ?>
-                    </h7>
-            </a>
+
+
+
+    <?php
+$logado = false;
+if (isset($_SESSION['nome'])) {
+    $logado = true;
+    $nom = $_SESSION['nome'];
+}
+?>
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+
+        <!-- Logo -->
+        <a class="navbar-brand ms-2" href="index.php">
+            <img src="img/logo.png" width="60" height="50" alt="Logo">
+            <b>Crimsom Beasts</b>
+        </a>
+
+        <!-- Botão do celular -->
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Conteúdo -->
+        <div class="collapse navbar-collapse bg-dark p-3 p-md-0" id="navbarMenu">
+
+            <!-- Empurra os links para a direita -->
+            <div class="ms-auto d-lg-flex align-items-center">
+
+                <a href="pacotinho.php"
+                   class="nav-link fw-bold me-lg-5 navbar-bran"  style= "font-size: 1.2rem;font-weight: bold;">
+                    Pacotinho
+                </a>
+
+                <a class="nav-link d-flex align-items-center navbar-brand" style= "font-size: 1.2rem;font-weight: bold;"
+                   href="<?= $logado ? 'verusuario.php' : 'login.php' ?>">
+
+                    <img src="img/login.png" width="45" height="45" class="me-2">
+
+                    <?= $logado ? $nom : 'Login' ?>
+
+                </a>
+
+            </div>
+
         </div>
-    </nav>
+
+    </div>
+</nav>

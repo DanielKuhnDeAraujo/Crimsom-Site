@@ -279,6 +279,7 @@ session_start();
             <p>&copy; 2026 Crimsom Beast. Todos os direitos reservados.</p>
         </div>
     </footer>
+    <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

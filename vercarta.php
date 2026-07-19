@@ -314,5 +314,6 @@ $id = $_SESSION['view_id'];
         qtyEl.classList.toggle('counter-qty--active', qty > 0);
     }
 </script>
+<script src="js/bootstrap.bundle.min.js"></script>
 
 </html>
