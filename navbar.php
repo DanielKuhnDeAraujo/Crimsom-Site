@@ -38,7 +38,7 @@ if (isset($_SESSION['nome'])) {
             <div class="ms-auto d-lg-flex align-items-center">
 
                 <a href="pacotinho.php"
-                   class="nav-link fw-bold me-lg-5 navbar-bran"  style= "font-size: 1.2rem;font-weight: bold;">
+                   class="nav-link me-lg-5 navbar-brand"  style= "font-size: 1.2rem;font-weight: bold;">
                     Pacotinho
                 </a>
 

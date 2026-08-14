@@ -38,7 +38,6 @@ $id = $_SESSION['view_id'];
         /* Imagem*/
         .carta-imagem-box {
             flex: 0 1 280px;
-            /* base de 280px, pode encolher até um mínimo */
             min-width: 100px;
             max-width: 100%;
             border: 3px solid #000;
@@ -145,44 +144,79 @@ $id = $_SESSION['view_id'];
 
         /*Responvidade*/
         @media (max-width: 780px) {
+            .container-wrap {
+                padding: 1.25rem .75rem;
+            }
+
             .carta-layout {
                 flex-direction: column;
                 /* empilha verticalmente */
                 align-items: center;
-                gap: 1.5rem;
+                gap: 1.25rem;
             }
 
             .carta-imagem-box {
                 flex: 0 0 auto;
-                width: 200px;
-                height: 200px;
-                /* mantém quadrado */
-                max-width: 60%;
+                width: 100%;
+                max-width: 380px;
+                aspect-ratio: 3 / 4;
+                height: auto;
             }
 
             .carta-info-panel {
                 flex: 0 0 auto;
                 width: 100%;
                 max-width: 500px;
-                padding: 1.25rem;
+                padding: 1.5rem;
+            }
+
+            .carta-info-panel .form-title {
+                font-size: 1.5rem;
             }
 
             .carta-info-panel .form-fields-grid {
-                grid-template-columns: 1fr;
-                /* vira uma coluna */
-                gap: 0.5rem;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.75rem 1rem;
+            }
+
+            .carta-info-panel .form-group label {
+                font-size: 0.8rem;
+            }
+
+            .carta-info-panel .form-static {
+                font-size: 1rem;
+                min-height: 42px;
             }
         }
 
         @media (max-width: 480px) {
             .carta-imagem-box {
-                width: 140px;
-                height: 140px;
-                max-width: 80%;
+                max-width: 100%;
+                aspect-ratio: 1 / 1;
             }
 
             .carta-info-panel {
-                padding: 1rem;
+                padding: 1.25rem;
+                border-radius: 12px;
+            }
+
+            .carta-info-panel .form-fields-grid {
+                grid-template-columns: 1fr;
+                gap: 0.6rem;
+            }
+
+            .carta-info-panel .form-title {
+                font-size: 1.35rem;
+            }
+
+            .carta-info-panel .d-flex {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .carta-info-panel .btn-toolbar {
+                width: 100%;
+                justify-content: center;
             }
         }
         .container-wrap{

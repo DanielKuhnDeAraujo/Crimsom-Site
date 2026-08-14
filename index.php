@@ -117,14 +117,6 @@ session_start(); ?>
                         <span class="card-edition">Coleção: <?= htmlspecialchars($row['COLECAO']) ?></span>
                         <span class="card-price">R$: <?= htmlspecialchars($row['PRECO']) ?></span>
                     </div>
-                    <div class="card-actions">
-                        <!-- <div class="card-counter">
-                            <button class="counter-btn" onclick="changeQty(this, -1)">−</button>
-                            <span class="counter-qty">0</span>
-                            <button class="counter-btn" onclick="changeQty(this, 1)">+</button>
-                        </div>
-                        <button class="btn-lista">+Lista</button> -->
-                    </div>
                 </div>
                 <?php
             }
