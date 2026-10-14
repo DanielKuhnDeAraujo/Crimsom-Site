@@ -61,3 +61,16 @@ INSERT INTO cartas(NOME,IMAGEM,SANGUE,RARIDADE,LENDARIO,COLECAO,ID2,PRECO)values
 ('Lobo Gigante+', 'logo.png', '3', 'excepcional', 'n', 'Base', 2, 89.90),
 ('Lobo Gigante+++', 'logo.png', '3', 'elite', 's', 'Base', 3, 199.90),
 ('Lobo Gigante++++', 'logo.png', '3', 'unico', 's', 'Base', 4, 349.90);
+
+
+-- Inserts de exemplo Decks
+-- cadastrar um usuário pra n dar merda.
+insert into decks(NOME,AUTOR, COMANDANTE,DESESPERO,DATACRIACAO,DATAMODIFICAÇAO) values
+("Resenha do lil macaco",1,1,2,GETDATE(),GETDATE()),
+("Mortos Molestator",1,3,4,GETDATE(),GETDATE());
+
+insert into CartaDeck(FKCARTA,FKDECK,QTD) values
+(3,1,4),
+(4,1,2),
+(2,2,3),
+(1,2,3);
