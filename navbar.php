@@ -37,6 +37,10 @@ if (isset($_SESSION['nome'])) {
             <!-- Empurra os links para a direita -->
             <div class="ms-auto d-lg-flex align-items-center">
 
+                <a href="#" class="nav-link me-lg-5 navbar-brand" style="font-size: 1.2rem;font-weight: bold;">
+                    Decks
+                </a>
+
                 <a href="pacotinho.php"
                    class="nav-link me-lg-5 navbar-brand"  style= "font-size: 1.2rem;font-weight: bold;">
                     Pacotinho

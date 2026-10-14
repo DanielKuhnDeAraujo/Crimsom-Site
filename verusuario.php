@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <?php
-session_start(); 
+session_start();
 if (isset($_SESSION['nome'])) {
-        $nomelog = $_SESSION['nome'];
-    } else {
-        header("Location:login.php");
-        exit;
-    }?>
+    $nomelog = $_SESSION['nome'];
+} else {
+    header("Location:login.php");
+    exit;
+} ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -207,7 +208,7 @@ if (isset($_SESSION['nome'])) {
     <?php include("navbar.php") ?>
 
     <?php
-    
+
     try {
         $sql = " SELECT * FROM usuario WHERE nome = :nome ";
         $query = $conn->prepare($sql);
@@ -220,7 +221,7 @@ if (isset($_SESSION['nome'])) {
             $SENHA = $dados["SENHA"];
             $NIVEL = $dados["NIVEL"];
         } else {
-            throw new Exception("O perfil de nome ". $nomelog. " não foi encontrado");
+            throw new Exception("O perfil de nome " . $nomelog . " não foi encontrado");
         }
 
     } catch (Exception $e) {
@@ -348,7 +349,7 @@ if (isset($_SESSION['nome'])) {
                                     <?= htmlspecialchars($NOME) ?>
                                 </td>
                             </tr>
-                            <tr >
+                            <tr>
                                 <th class="text-white p-md-2">Email:</th>
                                 <td class="text-white">
                                     <?= htmlspecialchars($EMAIL) ?>
@@ -443,13 +444,26 @@ if (isset($_SESSION['nome'])) {
         </div>
     </div>
 
+    <div class="decks01">
+
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <img src="..." class="card-img" alt="...">
+                <h5 class="mt-2 mb-0">Exemplo</h5>
+                <p class="card-text fg-2">exemplo</p>
+                <small class="fg-3"></small>
+            </div>
+        </div>
+
+    </div>
+
     <footer class="">
         <div class="container-fluid">
             <p>&copy; 2026 Crimsom Beast. Todos os direitos reservados.</p>
         </div>
     </footer>
     <script src="js/bootstrap.bundle.min.js"></script>
-    
+
 </body>
 
 </html>
