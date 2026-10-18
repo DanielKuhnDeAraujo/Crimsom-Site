@@ -40,6 +40,23 @@
     --shadow-glow: 0 0 20px rgba(158, 27, 50, 0.35);
 }
 
+
+.decks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1.5rem;
+}
+
+.decks-grid .card-wrap {
+    width: 100%;
+}
+
+.decks-grid .card-footer-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
 nav {
     background-color: var(--bg-secondary);
 }

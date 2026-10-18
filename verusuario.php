@@ -17,6 +17,92 @@ if (isset($_SESSION['nome'])) {
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
+
+        .botaum {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+        .decks-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8rem;
+            padding: 0 1rem;
+        }
+
+        .deck-card {
+            width: 190px;
+            height: 100%;
+            background: #000;
+            border: 1.5px solid var(--color-crimson-dark, #7a1226);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform .15s, box-shadow .15s;
+        }
+
+        .deck-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .deck-card-name {
+            background: #222;
+            color: #fff;
+            font-size: .8rem;
+            font-weight: 700;
+            margin: 0;
+            padding: .5rem .6rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .deck-card-art {
+            margin: 0;
+            height: 100%;
+        }
+
+        .deck-card-btn {
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            background: #000;
+            cursor: pointer;
+        }
+
+        .deck-card-btn img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: contain;
+            background: #0a0000;
+        }
+
+        .deck-card-footer {
+            background: #222;
+            color: #fff;
+            font-size: .7rem;
+            font-weight: 600;
+            padding: .45rem .6rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .deck-card-footer span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .deck-card-autor {
+            color: #aaa;
+            font-weight: 400;
+        }
+
         .page-header {
             margin-left: -1rem;
             gap: 1;
@@ -444,17 +530,53 @@ if (isset($_SESSION['nome'])) {
         </div>
     </div>
 
-    <div class="decks01">
 
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <img src="..." class="card-img" alt="...">
-                <h5 class="mt-2 mb-0">Exemplo</h5>
-                <p class="card-text fg-2">exemplo</p>
-                <small class="fg-3"></small>
-            </div>
+    <?php
+    $stmt = $conn->prepare('SELECT d.ID_DECK,
+                               d.NOME AS NOME_DECK,
+                               u.NOME AS NOME_AUTOR,
+                               c.NOME AS NOME_COMANDANTE,
+                               c.IMAGEM AS IMG_COMANDANTE
+                        FROM decks d
+                        INNER JOIN cartas c ON c.ID_CARTA = d.COMANDANTE
+                        INNER JOIN usuario u ON u.ID_USUARIO = d.AUTOR
+                        ORDER BY d.DATACRIACAO DESC');
+    $stmt->execute();
+    $decks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if (empty($decks)) {
+        echo '<p>Nenhum deck encontrado.</p>';
+    } else {
+        ?>
+        <div class="decks-grid">
+            <?php foreach ($decks as $row): ?>
+                <div class="deck-card">
+                    <h6 class="deck-card-name" title="<?= htmlspecialchars($row['NOME_DECK']) ?>">
+                        <?= htmlspecialchars($row['NOME_DECK']) ?>
+                    </h6>
+
+                    <form action="verdeck.php" method="POST" class="deck-card-art">
+                        <input type="hidden" name="id_deck" value="<?= (int) $row['ID_DECK'] ?>">
+                        <button type="submit" class="deck-card-btn">
+                            <img src="img/<?= htmlspecialchars($row['IMG_COMANDANTE']) ?>"
+                                alt="<?= htmlspecialchars($row['NOME_COMANDANTE']) ?>">
+                        </button>
+                    </form>
+
+                    <div class="deck-card-footer">
+                        <span title="<?= htmlspecialchars($row['NOME_COMANDANTE']) ?>">
+                            Comandante: <?= htmlspecialchars($row['NOME_COMANDANTE']) ?>
+                        </span>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
+        <?php
+    }
+    ?>
 
+    <div class="botaum">
+        <button type="button" class="btn btn-danger">Mais decks</button>
     </div>
 
     <footer class="">
