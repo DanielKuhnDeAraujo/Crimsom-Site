@@ -183,6 +183,8 @@ session_start();
 </head>
 
 <body>
+
+    <!--  Executar só se tiver o  get da coleção -->
     <?php
     include("navbar.php");
     include("conexao.php");
@@ -244,7 +246,24 @@ session_start();
                 <p class="pacotinho-subtitulo">9 cartas por pacote — role para revelar sua sorte.</p>
             </div>
         </div>
-
+        <div class="dropzin-das-colecao">
+            <form action="get">
+                <div class="row">
+                    <div class="col">
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Selecione a coleção</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- Daqui pra baixo são as cartas, só aparecer como get da descrição -->
         <div class="pacotinho-arena">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 justify-content-center">
                 <?php foreach ($cartasSelecionadas as $index => $carta):
