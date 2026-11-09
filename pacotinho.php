@@ -247,7 +247,7 @@ session_start();
             </div>
         </div>
         <div class="dropzin-das-colecao">
-            <form action="get">
+            <form action="pacotinho.php" method="get" >
                 <div class="row">
                     <div class="col">
                         <select class="form-select" aria-label="Default select example">
